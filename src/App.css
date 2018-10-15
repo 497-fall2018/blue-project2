@@ -2,31 +2,73 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+#rec {
+  margin-top: 45px;
 }
 
-.App-header {
+
+
+
+#logo {
+  position:absolute;
+  left:0;
+  top:0;
+}
+
+#app_title {
+  margin-top: 250px;
+  margin-bottom:2px;
+}
+
+.h6 {
+  margin-top: 0px;
+}
+
+/*.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}*/
+
+#app_header {
   background-color: #282c34;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
+  height:450px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /*justify-content: center;*/
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
+/*.App-link {
   color: #61dafb;
-}
+}*/
 
-@keyframes App-logo-spin {
+/*@keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
+}
+*/
+#add_activity {
+  margin-top: 50px;
+  background-color: #ffffff;
+  width: 50%;
+  height:50px;
+  align-items: center;
+  text-align:center;
+}
+
+#generate_music {
+  margin-top: 50px;
+  height:50px;
+  width:10%;
+  background-color: green;
+  color:#ffffff;
+  font-size:15px;
+  font-weight: bold;
 }
