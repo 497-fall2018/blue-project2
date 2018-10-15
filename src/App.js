@@ -3,22 +3,20 @@ import './App.css';
 import app_logo from './app_logo.png';
 import music from './autumn_leaves.mp3';
 import $ from 'jquery'; 
-// import Bloodhound from './typeahead.js/bloodhound.js';
+import {Typeahead} from 'react-bootstrap-typeahead'; // ES2015
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+
 
 class App extends Component {
+  
+  state = {
+      multiple: false,
+    };
+
+
   render() {
-    
-    // var activities = new Bloodhound({
-    // datumTokenizer: Bloodhound.tokenizers.whitespace,
-    // queryTokenizer: Bloodhound.tokenizers.whitespace,
-    //   prefetch: './activities.json'
-    // });
-
-    // $('#prefetch .typeahead').typeahead(null, {
-    //   name: 'activities',
-    //   source: activities
-    // });
-
+    var Typeahead = require('react-bootstrap-typeahead').Typeahead; // CommonJS
+    const {multiple} = this.state;
 
     return (
       <div className='App'>
@@ -38,6 +36,10 @@ class App extends Component {
               <div id="prefetch">
                 <input id='add_activity' class="typeahead" type="text" placeholder="Enter Your Activity Here"/>
               </div>
+
+           
+
+
 
               <button id="generate_music" onClick={function() {document.getElementById('rec').hidden=false;}}>Generate Music</button>
               </form>

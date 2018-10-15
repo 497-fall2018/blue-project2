@@ -1,3 +1,14 @@
+DJPrudo - Your Personal Music Creation App
+
+Dependencies: typeaway.js for React
+https://github.com/ericgio/react-bootstrap-typeahead
+
+To download type: yarn add react-bootstrap-typeahead
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
