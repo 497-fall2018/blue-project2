@@ -87,16 +87,18 @@ class App extends Component {
               </div>
 
            
-              <button id="generate_music" onClick={function() {user_requested_activity=document.getElementById('add_activity').innerHTML; requested_url=this.playlists[user_requested_activity]; document.getElementById('user_playlist').src=requested_url; document.getElementById('rec').hidden=false;}}>Generate Music</button>
+              <button id="generate_music" onClick={function() {user_requested_activity=document.getElementById('add_activity').innerHTML; requested_url=this.state.activity_src; document.getElementById('user_playlist').src=requested_url; document.getElementById('rec').hidden=false;}}>Generate Music</button>
               </form>
           </section>
 
           <div hidden id="rec" class="w3-third w3-margin-bottom">
           <div class="w3-container w3-white">
-            <p><b>Your Recommendation: Classical Music</b></p>
-            <p class="w3-opacity">Robert Belson plays Classical Guitar</p>
-            <iframe id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/281582773&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
-          </div>
+            {this.state.playlists.map((item) => {
+                return (
+                    <iframe id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src={item.activity_src}></iframe>
+                  )
+                })}
+            </div>
         </div>
 
 
