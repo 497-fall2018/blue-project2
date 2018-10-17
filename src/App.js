@@ -3,7 +3,7 @@ import './App.css';
 import app_logo from './app_logo.png';
 import music from './autumn_leaves.mp3';
 import $ from 'jquery'; 
-import {Typeahead} from 'react-bootstrap-typeahead'; // ES2015
+import { Typeahead } from 'react-bootstrap-typeahead'; // ES2015
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 
@@ -34,6 +34,12 @@ class App extends Component {
           <section className='add-item'>
               <form id="form" action="#">
               <div id="prefetch">
+                  <Typeahead
+                  labelKey="name"
+                  multiple={multiple}
+                  options={["Running","Studying","Working Out", "Eating","Sleeping","Relaxing"]}
+                  placeholder="Choose an activity"
+                  />
                 <input id='add_activity' class="typeahead" type="text" placeholder="Enter Your Activity Here"/>
               </div>
 
