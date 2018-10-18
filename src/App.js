@@ -24,22 +24,26 @@ class App extends Component {
 
   handleChange(e) {
     this.setState({
-      [e.target.name]:e.target.value
+      activity:e.target.value,
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const playlistsRef=firebase.database().ref('playlists');
-    const playlist = {
-      activity: this.state.activity,
-      activity_src: this.state.activity_src
-    }
-    playlistsRef.push(playlist);
+    var temp_url = ''
+    for (let p in this.state.playlists) {
+      if(this.state.playlists[p].activity.toUpperCase() == this.state.activity.toUpperCase()){
+        console.log(this.state.playlists[p].activity)
+          temp_url = this.state.playlists[p].activity_src;
+          console.log(temp_url);
+          break;
+
+        }
+      }
     this.setState({
-      activity:'',
-      activity_src:'',
+      activity_src:temp_url,
     });
+    console.log(this.state.activity_src)
   }
 
 
@@ -48,6 +52,7 @@ class App extends Component {
     playlistsRef.on('value', (snapshot) => {
       let playlists = snapshot.val();
       let newState = [];
+      
       for (let p in playlists) {
         newState.push({
           id: p,
@@ -55,13 +60,14 @@ class App extends Component {
           activity_src: playlists[p].activity_src
         });
       }
+
       this.setState({
-        playlists: newState
+        playlists: newState,
+        
       });
+
     });
     }
-
-
 
   render() {
     var user_requested_activity="";
@@ -89,33 +95,23 @@ class App extends Component {
         <div className='container'>
 
           <section className='add-item'>
-              <form id="form" action="#">
+              <form id="form" action="#" onSubmit={this.handleSubmit}>
               <div id="prefetch">
-                <input id='add_activity' class="typeahead" type="text" placeholder="Enter Your Activity Here" onChange={this.handelChange}/>
+                <input id='add_activity' class="typeahead" type="text" placeholder="Enter Your Activity Here" onChange={this.handleChange}/>
               </div>
-
-           
-              <button id="generate_music" onClick={function() {user_requested_activity=document.getElementById('add_activity').innerHTML; requested_url=this.state.activity_src; document.getElementById('user_playlist').src=requested_url; document.getElementById('rec').hidden=false;}}>Generate Music</button>
-              <button id="generate_music" 
-              onClick={
+              <button id="generate_music"
+                onClick={
                 function() {
-                  user_requested_activity=document.getElementById('add_activity').innerHTML; 
-                  {/*requested_url = */}
-                  document.getElementById('user_playlist').src=requested_url; 
                   document.getElementById('rec').hidden=false;}}>
                   Generate Music</button>
               </form>
               </section>
-          <div hidden id="rec" class="w3-third w3-margin-bottom">
-          <div class="w3-container w3-white">
-            {this.state.playlists.map((item) => {
-                return (
-                    <iframe id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src={item.activity_src}></iframe>
-                  )
-                })}
-            </div>
-        </div>
-        </div>
+              <div hidden id="rec" class="w3-third w3-margin-bottom">
+                <div class="w3-container w3-white">
+                    <iframe id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src={this.state.activity_src}></iframe>                 
+                </div>
+              </div>
+          </div>
       </div>
 
     );
