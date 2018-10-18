@@ -66,6 +66,13 @@ class App extends Component {
   render() {
     var user_requested_activity="";
     var requested_url="";
+    for (let p in this.state.playlists) {
+        if(this.state.playlists[p].activity == 'Cleaning'){
+          requested_url = this.state.playlists[p].activity_src;
+          break;
+        }
+      }
+
 
     return (
       <div className='App'>
@@ -80,6 +87,7 @@ class App extends Component {
         
 
         <div className='container'>
+
           <section className='add-item'>
               <form id="form" action="#">
               <div id="prefetch">
@@ -88,9 +96,16 @@ class App extends Component {
 
            
               <button id="generate_music" onClick={function() {user_requested_activity=document.getElementById('add_activity').innerHTML; requested_url=this.state.activity_src; document.getElementById('user_playlist').src=requested_url; document.getElementById('rec').hidden=false;}}>Generate Music</button>
+              <button id="generate_music" 
+              onClick={
+                function() {
+                  user_requested_activity=document.getElementById('add_activity').innerHTML; 
+                  {/*requested_url = */}
+                  document.getElementById('user_playlist').src=requested_url; 
+                  document.getElementById('rec').hidden=false;}}>
+                  Generate Music</button>
               </form>
-          </section>
-
+              </section>
           <div hidden id="rec" class="w3-third w3-margin-bottom">
           <div class="w3-container w3-white">
             {this.state.playlists.map((item) => {
@@ -100,10 +115,6 @@ class App extends Component {
                 })}
             </div>
         </div>
-
-
-
-
         </div>
       </div>
 
