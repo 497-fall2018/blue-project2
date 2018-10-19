@@ -82,35 +82,36 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <header id="app_header">
-          <img id="logo" src={app_logo} alt="logo" width="200"/>
-              <h1 id="app_title"> Welcome to DJPrudo!</h1>
-              <h4>Your Home For Personal Music Curation</h4>
-                <audio autoPlay loop>
-                <source src={music}/>
-                </audio>
-        </header>
-        
+          <div className ='searchPart'>
+            <header id="app_header">
+              <img id="logo" src={app_logo} alt="logo" width="200"/>
+                  <h1 id="app_title"> Welcome to DJPrudo!</h1>
+                  <h4>Your Home For Personal Music Curation</h4>
+                    <audio autoPlay loop>
+                    <source src={music}/>
+                    </audio>
+            </header>
 
-        <div className='container'>
-
-          <section className='add-item'>
-              <form id="form" action="#" onSubmit={this.handleSubmit}>
-              <div id="prefetch">
-                  <Typeahead
-                      labelKey="name"
-                      options={["Running","Studying","Working Out", "Eating","Sleeping","Relaxing"]}
-                      placeholder="Choose an activity"
-                      />
+              <section className='add-item'>
+                <form id="form" action="#" onSubmit={this.handleSubmit}>
+                <div id="prefetch">
+                      <Typeahead
+                          labelKey="name"
+                          options={["Running","Studying","Working Out", "Eating","Sleeping","Relaxing"]}
+                          placeholder="Choose an activity"
+                          />
                 <input id='add_activity' class="typeahead" type="text" placeholder="Enter Your Activity Here" onChange={this.handleChange}/>
-              </div>
-              <button id="generate_music"
-                onClick={
-                function() {
-                  document.getElementById('rec').hidden=false;}}>
-                  Generate Music</button>
-              </form>
+                </div>
+                  <button id="generate_music"
+                    onClick={
+                    function() {
+                      document.getElementById('rec').hidden=false;}}>
+                      Generate Music</button>
+                  </form>
               </section>
+          </div>
+
+          <div className= "RecPart">
               <div hidden id="rec" class="w3-third w3-margin-bottom">
                 <div class="w3-container w3-white">
                     <iframe id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src={this.state.activity_src}></iframe>                 
