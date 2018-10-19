@@ -2,10 +2,26 @@
 
 .App {
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
 }
 
 #rec {
   margin-top: 45px;
+}
+
+
+.searchPart{
+  background-color: #000;
+  flex:5;
+  min-height: 100vh;
+  color:white;
+}
+.RecPart{
+  flex:3;
+  min-height: 100vh;
+  background-color: grey;
 }
 
 
