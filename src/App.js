@@ -4,7 +4,7 @@ import app_logo from './app_logo.png';
 import music from './autumn_leaves.mp3';
 import firebase from './firebase.js';
 import $ from 'jquery'; 
-import {Typeahead} from 'react-bootstrap-typeahead'; // ES2015
+import { Typeahead } from 'react-bootstrap-typeahead'; // ES2015
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { Button } from 'reactstrap';
 
@@ -97,6 +97,12 @@ class App extends Component {
           <section className='add-item'>
               <form id="form" action="#" onSubmit={this.handleSubmit}>
               <div id="prefetch">
+                  <Typeahead
+                  labelKey="name"
+                  multiple={multiple}
+                  options={["Running","Studying","Working Out", "Eating","Sleeping","Relaxing"]}
+                  placeholder="Choose an activity"
+                  />
                 <input id='add_activity' class="typeahead" type="text" placeholder="Enter Your Activity Here" onChange={this.handleChange}/>
               </div>
               <button id="generate_music"
