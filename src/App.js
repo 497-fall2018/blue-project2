@@ -98,11 +98,10 @@ class App extends Component {
               <form id="form" action="#" onSubmit={this.handleSubmit}>
               <div id="prefetch">
                   <Typeahead
-                  labelKey="name"
-                  multiple={multiple}
-                  options={["Running","Studying","Working Out", "Eating","Sleeping","Relaxing"]}
-                  placeholder="Choose an activity"
-                  />
+                      labelKey="name"
+                      options={["Running","Studying","Working Out", "Eating","Sleeping","Relaxing"]}
+                      placeholder="Choose an activity"
+                      />
                 <input id='add_activity' class="typeahead" type="text" placeholder="Enter Your Activity Here" onChange={this.handleChange}/>
               </div>
               <button id="generate_music"

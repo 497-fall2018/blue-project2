@@ -28,6 +28,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "firebase": "^5.5.4"
+    "firebase": "^5.5.5"
   }
 }
