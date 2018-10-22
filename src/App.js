@@ -8,8 +8,7 @@ import { Typeahead } from 'react-bootstrap-typeahead'; // ES2015
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Searchbutton from './component/searchbutton';
-
+import Autosu from './component/input-search';
 class App extends Component {
 
   constructor() {
@@ -22,12 +21,25 @@ class App extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleValue = this.handleValue.bind(this);
   }
-
+  handleValue(key) {
+    console.log("11111");
+    this.setState({
+      activity: key,
+    });
+  }
   handleChange(e) {
     this.setState({
       activity: e.target.value,
     });
+  }
+  handleKeyDown(e) {
+
+    console.log("success!");
+
+
   }
 
   handleSubmit(e) {
@@ -35,9 +47,9 @@ class App extends Component {
     var temp_url = ''
     for (let p in this.state.playlists) {
       if (this.state.playlists[p].activity.toUpperCase() == this.state.activity.toUpperCase()) {
-        console.log(this.state.playlists[p].activity)
+        //console.log(this.state.playlists[p].activity)
         temp_url = this.state.playlists[p].activity_src;
-        console.log(temp_url);
+        //console.log(temp_url);
         break;
 
       }
@@ -88,7 +100,7 @@ class App extends Component {
         <div className='searchPart'>
 
           <section className='add-item'>
-            <form id="form" action="#" onSubmit={this.handleSubmit}>
+            <form id="form" action="#" onSubmit={this.handleSubmit} >
               <div id="prefetch">
                 <div style={{ padding: 100 }}>
                   <Grid
@@ -105,9 +117,7 @@ class App extends Component {
                       DJ Produ saves your favorite beats all across platforms. Type your task and you are ready to go!
       </Typography>
                     <div style={{ marginTop: 20 }}>
-
-                      <Searchbutton />
-
+                      <Autosu trigger={this.handleKeyDown} activ={this.handleValue} />
 
                     </div>
                   </Grid>
