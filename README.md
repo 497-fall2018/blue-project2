@@ -15,6 +15,15 @@ npm install @material-ui/core
 
 npm i @material-ui/icons
 
+
+
+```
+
+
+To use react-redux:
+```
+yarn add redux react-redux
+
 ```
 
 To download Typeaway for React: 

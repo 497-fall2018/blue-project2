@@ -24,7 +24,14 @@ class App extends Component {
       playlists: []
     }
 
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      activity: e.target.value,
+    });
   }
 
   handleSubmit(e) {
@@ -86,11 +93,7 @@ class App extends Component {
           <section className='add-item'>
             <form id="form" action="#" onSubmit={this.handleSubmit} >
               <div id="prefetch">
-                <div style={{
-                  paddingTop: 200,
-                  paddingLeft: 100,
-                  paddingRight: 100
-                }}>
+                <div style={{ padding: 100 }}>
                   <Grid
                     container
                     direction="column"
@@ -111,17 +114,27 @@ class App extends Component {
                   </Grid>
                 </div>
 
-
+                <Typeahead
+                  labelKey="name"
+                  options={["Running", "Studying", "Working Out", "Eating", "Sleeping", "Relaxing"]}
+                  placeholder="Choose an activity"
+                />
+                <input id='add_activity' class="typeahead" type="text" placeholder="Enter Your Activity Here" onChange={this.handleChange} />
               </div>
 
-
+              <button id="generate_music"
+                onClick={
+                  function () {
+                    document.getElementById('rec').hidden = false;
+                  }}>
+                Generate Music</button>
 
             </form>
           </section>
         </div>
 
         <div className="RecPart">
-          <div id="rec" class="w3-third w3-margin-bottom">
+          <div hidden id="rec" class="w3-third w3-margin-bottom">
             <div class="w3-container w3-white">
               <iframe id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src={this.state.activity_src}></iframe>
             </div>

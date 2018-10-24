@@ -11,6 +11,9 @@ import { withStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Search from '@material-ui/icons/Search'
 import { IconButton } from '@material-ui/core';
+import { connect } from 'react-redux'
+import { updateActivity } from '../actions/actionCreator'
+import { bindActionCreators } from 'redux'
 
 const suggestions = [
   { label: 'Running' },
@@ -35,8 +38,8 @@ function renderInputComponent(inputProps) {
         },
         endAdornment: (
           <InputAdornment position="start">
-            <IconButton onClick={inputProps.trigger} classes={{
-              root: classes.root
+            <IconButton classes={{
+              root: classes.btn
             }}><Search /></IconButton>
 
           </InputAdornment>
@@ -103,6 +106,10 @@ const styles = theme => ({
     flexGrow: 1,
     color: 'white',
   },
+  btn: {
+    flexGrow: 1,
+    color: 'white',
+  },
   container: {
     position: 'relative',
   },
@@ -144,11 +151,14 @@ const styles = theme => ({
 
 class IntegrationAutosuggest extends React.Component {
 
-  state = {
-    single: '',
-    popper: '',
-    suggestions: [],
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      single: '',
+      suggestions: [],
+    }
+  }
+
 
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
@@ -160,36 +170,34 @@ class IntegrationAutosuggest extends React.Component {
       suggestions: [],
     });
   };
-  // handleKeyDown(event) {
-  //   if (event.key == 'Enter') {
-  //     this.props.activ = this.state.single;
-  //     console.log("success!");
-  //   }
-  // }
-  // handleKeyPress = value => (event) => {
-  //   if (event.key == 'Enter') {
-  //     value = this.state.single;
-  //   }
-  // };
-  handleChange = name => (event, { newValue }) => {
+  handleKeyDown = (name) => (event) => {
+    this.props.updateActivity(this.state.single);
+    // if (event.key == 'Enter') {
+    //   this.props.updateActivity(this.state.single);
+    //   console.log(this.props.updateActivity(this.state.single))
+    // }
+  }
+  handleChange = (name) => (event, { newValue }) => {
     this.setState({
       [name]: newValue,
     });
+
   };
 
   render() {
-    const { classes, activ } = this.props;
+    const { classes } = this.props;
 
     const autosuggestProps = {
       renderInputComponent,
       suggestions: this.state.suggestions,
       onSuggestionsFetchRequested: this.handleSuggestionsFetchRequested,
       onSuggestionsClearRequested: this.handleSuggestionsClearRequested,
+      handleKeyDown: this.handleKeyDown,
       getSuggestionValue,
       renderSuggestion,
     };
-
     return (
+
       <div className={classes.root}>
         <Autosuggest
           {...autosuggestProps}
@@ -198,7 +206,7 @@ class IntegrationAutosuggest extends React.Component {
             placeholder: 'Insert your activity here!',
             value: this.state.single,
             onChange: this.handleChange('single'),
-            //onKeyPress: activ[this.state.single],
+            onKeyDown: this.handleKeyDown('single'),
           }}
           theme={{
             container: classes.container,
@@ -222,4 +230,9 @@ IntegrationAutosuggest.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(IntegrationAutosuggest);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    updateActivity
+  }, dispatch)
+}
+export default withStyles(styles)(connect(null, mapDispatchToProps)(IntegrationAutosuggest));
