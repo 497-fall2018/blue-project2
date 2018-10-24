@@ -13,17 +13,48 @@
 
 
 .searchPart{
-  background-color: #000;
+  background-color: #212121;
   flex:5;
   min-height: 100vh;
   color:white;
 }
+
 .RecPart{
   flex:3;
   min-height: 100vh;
-  background-color: grey;
+  background-color: #505050;
 }
 
+.iframe{
+  overflow: hidden;
+  margin-top: 20px;
+  height: 300px;
+  width: 90%;
+  /* border: 1px solid white; */
+
+}
+
+.platformIcon{
+  height: 70px;
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
+.spIcon{
+  height: 75px;
+  margin-right: 20px;
+  margin-left: -150px;
+  margin-top: 30px;
+}
+
+.greyContainer{
+  background-color: #adadad;
+  border-radius: 20px;
+  margin-left: 25px;
+  margin-right: 25px;
+  height:80%;
+  margin-top: -25px;
+}
 
 #select_activity {
   list-style-type: none;

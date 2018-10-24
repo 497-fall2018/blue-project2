@@ -121,11 +121,16 @@ class App extends Component {
         </div>
 
         <div className="RecPart">
+        <img className="spIcon" src={require('./img/spotify.ico')}/>
+        <img className="platformIcon" src={require('./img/soundcloud.png')}/>
+        <img className="platformIcon" src={require('./img/youtube.png')}/>
+        <div className="greyContainer">
           <div id="rec" class="w3-third w3-margin-bottom">
             <div class="w3-container w3-white">
-              <iframe id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src={this.state.activity_src}></iframe>
+              <iframe  className="iframe" allow="encrypted-media" id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src={this.state.activity_src}></iframe>
             </div>
           </div>
+        </div>
         </div>
       </div>
 
