@@ -9,6 +9,22 @@ To download firebase:
 yarn add firebase --dev
 ```
 
+To use material-ui:
+```
+npm install @material-ui/core
+
+npm i @material-ui/icons
+
+
+
+```
+
+
+To use react-redux:
+```
+yarn add redux react-redux
+
+```
 
 To download Typeaway for React: 
 
