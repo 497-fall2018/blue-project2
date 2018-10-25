@@ -20,12 +20,6 @@ npm i @material-ui/icons
 ```
 
 
-To use react-redux:
-```
-yarn add redux react-redux
-
-```
-
 To download Typeaway for React: 
 
 ```
@@ -37,6 +31,13 @@ To download Bootstrap for React:
 ```
 npm install bootstrap --save
 npm install --save reactstrap react react-dom
+```
+
+
+To use react-redux:
+```
+yarn add redux react-redux
+
 ```
 
 
