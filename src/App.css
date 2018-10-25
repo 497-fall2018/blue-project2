@@ -135,6 +135,16 @@
   font-weight: bold;
 }
 
+.videoTag {
+width: 100%;
+margin-bottom: 50%;
+opacity:0.4;
+}
+
+#form {
+  height:50px;
+}
+
 
 
 /**************************************************************************/

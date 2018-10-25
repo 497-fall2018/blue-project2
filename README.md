@@ -41,6 +41,13 @@ yarn add redux react-redux
 ```
 
 
+To download react-googlemap:
+
+```
+npm install --save google-maps-react
+```
+
+
 When things are broken, please try:
 ```
 rm ./yarn.lock

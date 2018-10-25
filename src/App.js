@@ -12,6 +12,11 @@ import Autosu from './component/input-search';
 import { connect } from 'react-redux'
 import { updateActivity } from './actions/actionCreator'
 import { bindActionCreators } from 'redux'
+import background_video from './background.mp4';
+import background_video2 from './DJ_Audio.mp4';
+
+
+
 
 class App extends Component {
 
@@ -81,8 +86,8 @@ class App extends Component {
 
     return (
       <div className='App'>
-
         <div className='searchPart'>
+
           <section className='add-item'>
             <form id="form" action="#" onSubmit={this.handleSubmit} >
               <div id="prefetch">
@@ -117,6 +122,10 @@ class App extends Component {
 
 
             </form>
+
+            <video className='videoTag' autoPlay loop muted>
+    <source src={background_video2} type='video/mp4' /> </video>
+
           </section>
         </div>
 
