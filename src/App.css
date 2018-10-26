@@ -28,11 +28,12 @@
 }
 
 .iframe{
-  
+
   overflow: hidden;
   margin-top: 20px;
   height: 300px;
   width: 90%;
+  opacity: 1;
   /* border: 1px solid white; */
 
 }
@@ -46,8 +47,9 @@
 }
 
 .greyContainer{
- 
+
   background-color: #adadad;
+  opacity: .9;
   border-radius: 20px;
   margin-left: 25px;
   margin-right: 25px;
@@ -138,7 +140,7 @@
   position: fixed;
   right: 0;
   bottom: 0;
-  min-width: 100%; 
+  min-width: 100%;
   min-height: 100%;
   opacity:0.4;
   z-index: -1;

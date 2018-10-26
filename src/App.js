@@ -14,8 +14,11 @@ import { updateActivity } from './actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import background_video from './background.mp4';
 import background_video2 from './DJ_Audio.mp4';
-
-
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import SimpleModalWrapped from './component/SimpleModal.js'
 
 
 class App extends Component {
@@ -50,6 +53,13 @@ class App extends Component {
     console.log(this.state.activity_src)
   }
 
+  handleOpenModal = () => {
+    this.setState({open : true});
+  }
+
+  handleClose = () => {
+    this.setState({open : false});
+  }
 
   componentDidMount() {
     const playlistsRef = firebase.database().ref('playlists');
@@ -109,8 +119,9 @@ class App extends Component {
                     </Typography>
                     <Typography align='left' color='inherit' variant="h5" gutterBottom>
                       DJ Produ saves your favorite beats all across platforms. Type your task and you are ready to go!
-      </Typography>
-                    <div style={{ marginTop: 20 }}>
+                    </Typography>
+                      <SimpleModalWrapped />
+                  <div style={{ marginTop: 20 }}>
                       <Autosu />
 
                     </div>
