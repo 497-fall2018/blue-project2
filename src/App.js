@@ -87,7 +87,8 @@ class App extends Component {
     return (
       <div className='App'>
         <div className='searchPart'>
-
+          <video className='videoTag' autoPlay loop muted>
+            <source src={background_video2} type='video/mp4' /> </video>
           <section className='add-item'>
             <form id="form" action="#" onSubmit={this.handleSubmit} >
               <div id="prefetch">
@@ -123,8 +124,7 @@ class App extends Component {
 
             </form>
 
-            <video className='videoTag' autoPlay loop muted>
-              <source src={background_video2} type='video/mp4' /> </video>
+
 
           </section>
         </div>

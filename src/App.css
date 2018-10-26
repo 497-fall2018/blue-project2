@@ -13,13 +13,15 @@
 
 
 .searchPart{
-  background-color: #212121;
+  background: rgba(0, 0, 0, 0.7);
   flex:5;
   min-height: 100vh;
+  z-index:0;
   color:white;
 }
 
 .RecPart{
+  z-index:1;
   flex:3;
   min-height: 100vh;
   background-color: #505050;
@@ -131,9 +133,13 @@
 }
 
 .videoTag {
-width: 100%;
-/*margin-bottom: 50%;*/
-opacity:0.4;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  opacity:0.4;
+  z-index: -1;
 }
 
 #form {
