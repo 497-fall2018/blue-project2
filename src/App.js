@@ -92,7 +92,7 @@ class App extends Component {
             <form id="form" action="#" onSubmit={this.handleSubmit} >
               <div id="prefetch">
                 <div style={{
-                  paddingTop: 200,
+                  paddingTop: 130,
                   paddingLeft: 100,
                   paddingRight: 100
                 }}>
@@ -149,6 +149,7 @@ class App extends Component {
               </div>
             </div>
           </div>
+
         </div>
       </div>
 
