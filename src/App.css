@@ -24,10 +24,11 @@
   z-index:1;
   flex:3;
   min-height: 100vh;
-  background-color: #505050;
+  background-color:rgba(0, 0, 0, 0.7);;
 }
 
 .iframe{
+  
   overflow: hidden;
   margin-top: 20px;
   height: 300px;
@@ -45,6 +46,7 @@
 }
 
 .greyContainer{
+ 
   background-color: #adadad;
   border-radius: 20px;
   margin-left: 25px;
