@@ -1,4 +1,4 @@
-import { UPDATE_ACTIVITY } from '../actions/actionTypes'
+import { UPDATE_ACTIVITY} from '../actions/actionTypes'
 
 // const INITIAL_DATA =  
 //     {

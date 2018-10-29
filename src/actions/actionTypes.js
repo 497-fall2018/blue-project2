@@ -1,1 +1,2 @@
 export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY'
+export const GET_PLAYLISTS = 'GET_PLAYLISTS'
