@@ -187,6 +187,7 @@ class IntegrationAutosuggest extends React.Component {
 
   render() {
     const { classes } = this.props;
+    // const children = this.options.children;
 
     const autosuggestProps = {
       renderInputComponent,
@@ -197,6 +198,19 @@ class IntegrationAutosuggest extends React.Component {
       getSuggestionValue,
       renderSuggestion,
     };
+
+    function renderSuggestionContainerWithChildren(options)
+    {
+      return (
+          <Paper {...options.containerProps} square>
+            {options.children}
+            <Button>
+              Add new stuff
+            </Button>
+          </Paper>
+      );
+    }
+
     return (
 
       <div className={classes.root}>
@@ -217,10 +231,14 @@ class IntegrationAutosuggest extends React.Component {
           }}
           renderSuggestionsContainer={options => (
             <Paper {...options.containerProps} square>
-              {options.children}
-              <Button>
-                Add new stuff
-              </Button>
+                {options.children}
+                {options.children ?
+                    (<Button>
+                        Add new activity
+                    </Button>)
+                        :
+                    null
+                }
             </Paper>
           )}
         />
