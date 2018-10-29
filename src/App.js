@@ -14,20 +14,27 @@ import { updateActivity } from './actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import background_video from './background.mp4';
 import background_video2 from './DJ_Audio.mp4';
+import SpotifyPlayer from 'react-spotify-player';
 
 
-
+const size = {
+    width: '100%',
+    height: '50%',
+  };
+  const view = 'list'; // or 'coverart'
+  const theme = 'black'; // or 'white'
 
 class App extends Component {
 
-  constructor() {
 
+  constructor() {
     super();
     this.state = {
       //activity: '',
       activity_src: '',
       playlists: []
     }
+
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -116,17 +123,16 @@ class App extends Component {
                     </div>
                   </Grid>
                 </div>
-
-
               </div>
-
-
-
             </form>
-
-
-
           </section>
+
+            <SpotifyPlayer 
+            uri="spotify:playlist:37i9dQZEVXbLRQDuF5jeBp"
+            size={size}
+            view={view}
+            theme={theme}
+          />
         </div>
 
         <div className="RecPart">

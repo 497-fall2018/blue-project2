@@ -20,6 +20,11 @@
   color:white;
 }
 
+
+.SpotifyPlayer {
+  margin-top: 35%;
+}
+
 .RecPart{
   z-index:1;
   flex:3;

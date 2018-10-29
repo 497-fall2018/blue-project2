@@ -47,6 +47,13 @@ To download react-googlemap:
 npm install --save google-maps-react
 ```
 
+To download Spotify player:
+
+```
+npm install react-spotify-player
+```
+
+
 
 When things are broken, please try:
 ```
