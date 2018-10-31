@@ -1,5 +1,6 @@
 import { UPDATE_ACTIVITY, GET_PLAYLISTS } from './actionTypes'
 
+
 export const updateActivity = (text) => ({
   type: UPDATE_ACTIVITY,
   activity: text

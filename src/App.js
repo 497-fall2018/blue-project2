@@ -14,20 +14,28 @@ import { updateActivity } from './actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import background_video from './background.mp4';
 import background_video2 from './DJ_Audio.mp4';
+import SpotifyPlayer from 'react-spotify-player';
 
 
-
+const size = {
+    width: '100%',
+    height: '50%',
+  };
+  const view = 'list'; // or 'coverart'
+  const theme = 'black'; // or 'white'
 
 class App extends Component {
 
-  constructor() {
 
+  constructor() {
     super();
     this.state = {
       //activity: '',
       activity_src: '',
-      playlists: []
+      playlists: [],
+      button_clicked: false
     }
+
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -73,6 +81,26 @@ class App extends Component {
     });
   }
 
+  handleClick() {
+
+    if (this.state.button_clicked==false) {
+    document.getElementById("spotifydiv").hidden=true;
+    this.setState({
+      button_clicked: true,
+    });
+  }
+    else {
+    document.getElementById("spotifydiv").hidden=false;
+    this.setState({
+      button_clicked: false,
+    });
+  }
+
+
+
+  }
+
+
   render() {
     var user_requested_activity = "";
     var requested_url = "";
@@ -116,17 +144,11 @@ class App extends Component {
                     </div>
                   </Grid>
                 </div>
-
-
               </div>
-
-
-
             </form>
-
-
-
           </section>
+
+           
         </div>
 
         <div className="RecPart">
@@ -140,6 +162,8 @@ class App extends Component {
             <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} />
             <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} />
             <img alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} />
+            <img alt="chartsicon" className="platformIcon" src={require('./img/charts.png')} onClick={(e) => this.handleClick(e)} />
+
           </Grid>
 
           <div className="greyContainer">
@@ -148,6 +172,16 @@ class App extends Component {
                 <iframe className="iframe" allow="encrypted-media" id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src={this.state.activity_src}></iframe>
               </div>
             </div>
+
+          <div className="spotifydiv" id="spotifydiv">
+             <SpotifyPlayer 
+            uri="spotify:playlist:37i9dQZEVXbLRQDuF5jeBp"
+            size={size}
+            view={view}
+            theme={theme}
+          />
+          </div>
+
           </div>
 
         </div>

@@ -20,6 +20,16 @@
   color:white;
 }
 
+
+.spotifydiv {
+  height:100%;
+}
+
+
+.SpotifyPlayer {
+  margin-top: 10%;
+}
+
 .RecPart{
   z-index:1;
   flex:3;
@@ -36,6 +46,11 @@
   /* border: 1px solid white; */
 
 }
+
+.platformIcon:hover {
+  cursor:pointer;
+}
+
 
 .platformIcon{
   height: 70px;
