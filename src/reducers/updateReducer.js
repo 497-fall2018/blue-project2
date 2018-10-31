@@ -1,5 +1,4 @@
 import { UPDATE_ACTIVITY } from '../actions/actionTypes'
-
 // const INITIAL_DATA =  
 //     {
 //         activity: reading
@@ -8,6 +7,7 @@ import { UPDATE_ACTIVITY } from '../actions/actionTypes'
 const INITIAL_DATA = {
   activity: ""
 }
+
 
 const activReducer = (state = INITIAL_DATA, action) => {
   switch (action.type) {
@@ -21,6 +21,9 @@ const activReducer = (state = INITIAL_DATA, action) => {
       return state;
   }
 }
+
+
+
 
 
 export default activReducer
