@@ -14,7 +14,8 @@ import { updateActivity } from './actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import background_video from './background.mp4';
 import background_video2 from './DJ_Audio.mp4';
-
+import * as fromP from './reducers/getPlaylist'
+// import gql from "graphql-tag";
 
 
 
@@ -34,6 +35,7 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log(this.props.activity);
     var temp_url = ''
     for (let p in this.state.playlists) {
       if (this.state.playlists[p].activity.toUpperCase() == this.props.activity.toUpperCase()) {
@@ -47,33 +49,15 @@ class App extends Component {
     this.setState({
       activity_src: temp_url,
     });
-    console.log(this.state.activity_src)
+
   }
 
-
   componentDidMount() {
-    const playlistsRef = firebase.database().ref('playlists');
-    playlistsRef.on('value', (snapshot) => {
-      let playlists = snapshot.val();
-      let newState = [];
 
-      for (let p in playlists) {
-        newState.push({
-          id: p,
-          activity: playlists[p].activity,
-          activity_src: playlists[p].activity_src
-        });
-      }
-
-      this.setState({
-        playlists: newState,
-
-      });
-
-    });
   }
 
   render() {
+
     var user_requested_activity = "";
     var requested_url = "";
     for (let p in this.state.playlists) {
@@ -104,6 +88,7 @@ class App extends Component {
                     alignItems="left"
 
                   >
+
                     <Typography align='left' color='inherit' component="h2" variant="h1" gutterBottom>
                       DJ Produ
                     </Typography>
@@ -145,10 +130,12 @@ class App extends Component {
           <div className="greyContainer">
             <div id="rec" class="w3-third w3-margin-bottom">
               <div class="w3-container w3-white">
-                <iframe className="iframe" allow="encrypted-media" id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src={this.state.activity_src}></iframe>
+                {fromP.aplaylist(this.props.activity)}
+                <iframe className="iframe" allow="encrypted-media" id="user_playlist" width="75%" height="600" scrolling="no" frameborder="no" src={this.state.activity_src}></iframe>
               </div>
             </div>
           </div>
+          {/* {fromP.playlists()} */}
 
         </div>
       </div>
@@ -157,7 +144,10 @@ class App extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  return { activity: state.activReducer.activity }
+  console.log(state);
+  return {
+    activity: state.activReducer.activity
+  }
 }
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({

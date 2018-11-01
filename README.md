@@ -8,6 +8,30 @@ To download firebase:
 ```
 yarn add firebase --dev
 ```
+To use firebase cloud functions:
+```
+cd functions/
+npm i firebase-functions
+npm i firebase-admin
+```
+
+To use graphql with apollo-server and react-apollo:
+```
+npm i graphql-tag
+npm i react-apollo
+npm i apollo-boost
+
+cd functions/
+npm i cors
+npm i express
+npm i graphql
+npm i graphql-tools
+npm i apollo-server
+npm i apollo-server-express
+
+
+```
+
 
 To use material-ui:
 ```
