@@ -159,10 +159,11 @@ class App extends Component {
             style={{ textAlign: "left", padding: 20 }}
             wrap="wrap"
           >
-            <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} />
+            <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleClick(e)}/>
             <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} />
             <img alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} />
-            <img alt="chartsicon" className="platformIcon" src={require('./img/charts.png')} onClick={(e) => this.handleClick(e)} />
+            <img id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} />
+            
 
           </Grid>
 

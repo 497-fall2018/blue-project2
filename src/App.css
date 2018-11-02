@@ -47,7 +47,7 @@
 
 }
 
-.platformIcon:hover {
+.platformIcon:hover, .spIcon:hover {
   cursor:pointer;
 }
 
@@ -59,6 +59,7 @@
  .spIcon{
   height: 75px;
 }
+
 
 .greyContainer{
  
