@@ -19,7 +19,7 @@ import SpotifyPlayer from 'react-spotify-player';
 
 const size = {
     width: '100%',
-    height: '50%',
+    height: '100%',
   };
   const view = 'list'; // or 'coverart'
   const theme = 'black'; // or 'white'
@@ -85,9 +85,9 @@ class App extends Component {
 
   handleSpotifyClick() {
     if (this.state.spotify_clicked==false) {
-    document.getElementById("spotifydiv").hidden=false;
-    document.getElementById("soundclouddiv").hidden=true;
-    document.getElementById("NUdiv").hidden=true;
+    document.getElementById("spotifydiv").style.display="block";
+    document.getElementById("soundclouddiv").style.display="none";
+    document.getElementById("NUdiv").style.display="none";
     this.setState({
       spotify_clicked: true,
       soundcloud_clicked: false,
@@ -98,9 +98,9 @@ class App extends Component {
 
    handleSoundcloudClick() {
     if (this.state.soundcloud_clicked==false) {
-    document.getElementById("soundclouddiv").hidden=false;
-    document.getElementById("spotifydiv").hidden=true;
-    document.getElementById("NUdiv").hidden=true;
+    document.getElementById("soundclouddiv").style.display="block";
+    document.getElementById("spotifydiv").style.display="none";
+    document.getElementById("NUdiv").style.display="none";
     this.setState({
       soundcloud_clicked: true,
       spotify_clicked: false,
@@ -111,9 +111,9 @@ class App extends Component {
 
  handleNUClick() {
     if (this.state.NU_clicked==false) {
-    document.getElementById("NUdiv").hidden=false;
-    document.getElementById("spotifydiv").hidden=true;
-    document.getElementById("soundclouddiv").hidden=true;
+    document.getElementById("NUdiv").style.display="block";
+    document.getElementById("spotifydiv").style.display="none";
+    document.getElementById("soundclouddiv").style.display="none";
     this.setState({
       NU_clicked: true,
       spotify_clicked: false,
@@ -195,7 +195,7 @@ class App extends Component {
               </div>
             </div>
 
-          <div hidden className="spotifydiv" id="spotifydiv">
+          <div className="spotifydiv" id="spotifydiv">
              <SpotifyPlayer 
             uri="spotify:playlist:37i9dQZEVXbLRQDuF5jeBp"
             size={size}
@@ -204,12 +204,12 @@ class App extends Component {
           />
           </div>
           
-          <div hidden id="NUdiv">
-          <iframe width="100%" height="50%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+          <div id="NUdiv">
+          <iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
           </div>
 
-          <div hidden id="soundclouddiv">
-          <iframe width="100%" height="50%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/212094702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+          <div id="soundclouddiv">
+          <iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/212094702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
           </div>
 
           </div>

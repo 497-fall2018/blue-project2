@@ -22,12 +22,14 @@
 
 
 #NUdiv, #soundclouddiv {
+  height:50%;
+  display: none;
   margin-top: 10%;
-  height:100%;
 }
 
 .spotifydiv {
-  height:100%;
+  height:50%;
+  display:none;
 }
 
 
