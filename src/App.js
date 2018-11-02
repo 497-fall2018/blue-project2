@@ -33,7 +33,9 @@ class App extends Component {
       //activity: '',
       activity_src: '',
       playlists: [],
-      button_clicked: false
+      spotify_clicked: false,
+      soundcloud_clicked:false,
+      NU_clicked: false
     }
 
 
@@ -81,25 +83,50 @@ class App extends Component {
     });
   }
 
-  handleClick() {
-
-    if (this.state.button_clicked==false) {
-    document.getElementById("spotifydiv").hidden=true;
+  handleSpotifyClick() {
+    if (this.state.spotify_clicked==false) {
+    document.getElementById("spotifydiv").hidden=false;
     this.setState({
-      button_clicked: true,
+      spotify_clicked: true,
     });
   }
     else {
-    document.getElementById("spotifydiv").hidden=false;
+    document.getElementById("spotifydiv").hidden=true;
     this.setState({
-      button_clicked: false,
+      spotify_clicked: false,
     });
   }
-
-
-
   }
 
+   handleSoundcloudClick() {
+    if (this.state.soundcloud_clicked==false) {
+    document.getElementById("soundclouddiv").hidden=true;
+    this.setState({
+      soundcloud_clicked: true,
+    });
+  }
+    else {
+    document.getElementById("soundclouddiv").hidden=false;
+    this.setState({
+      soundcloud_clicked: false,
+    });
+  }
+  }
+
+ handleNUClick() {
+    if (this.state.NU_clicked==false) {
+    document.getElementById("NUdiv").hidden=false;
+    this.setState({
+      NU_clicked: true,
+    });
+  }
+    else {
+    document.getElementById("NUdiv").hidden=true;
+    this.setState({
+      NU_clicked: false,
+    });
+  }
+  }
 
   render() {
     var user_requested_activity = "";
@@ -159,10 +186,10 @@ class App extends Component {
             style={{ textAlign: "left", padding: 20 }}
             wrap="wrap"
           >
-            <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleClick(e)}/>
-            <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} />
+            <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)}/>
+            <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
             <img alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} />
-            <img id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} />
+            <img id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} onClick={(e) => this.handleNUClick(e)} />
             
 
           </Grid>
@@ -174,7 +201,7 @@ class App extends Component {
               </div>
             </div>
 
-          <div className="spotifydiv" id="spotifydiv">
+          <div hidden className="spotifydiv" id="spotifydiv">
              <SpotifyPlayer 
             uri="spotify:playlist:37i9dQZEVXbLRQDuF5jeBp"
             size={size}
@@ -182,6 +209,11 @@ class App extends Component {
             theme={theme}
           />
           </div>
+          
+          <div hidden id="NUdiv">
+          <iframe width="100%" height="50%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+          </div>
+
 
           </div>
 
