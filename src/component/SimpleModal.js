@@ -25,9 +25,19 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
+    font: 'Lato',
+    borderRadius: '5px'
   },
-});
 
+  error: {
+    color: 'red',
+    fontSize: '16px',
+    marginLeft: theme.spacing.unit * 25,
+    marginTop: '30px',
+    // marginBottom: '-10px',
+    width: theme.spacing.unit * 50,
+  }
+});
 
     function validate(name, link) {
     // we are going to store errors for all fields
@@ -46,16 +56,20 @@ const styles = theme => ({
   }
 
 class SimpleModal extends React.Component {
-  state = {
-    open: false,
-    name: '',
-    link:'',
-    errors: []
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false,
+      name: '',
+      link:'',
+      errors: []
+  }
   };
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
+  // handleOpen = (o) => {
+  //   this.setState({ open: o });
+  // };
 
   handleClose = () => {
     this.setState({ open: false });
@@ -70,30 +84,30 @@ class SimpleModal extends React.Component {
     }
     else{
       this.setState({open: false});
-      
+
     }
 
   };
+
+  componentDidMount() {
+    this.setState({ open: this.props.open });
+  }
 
   render() {
     const { classes } = this.props;
     const {errors} = this.state;
     return (
       <div>
-        <Button onClick={this.handleOpen}>Open Modal</Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.open}
+          open={this.props.open}
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title">
               Add a new activity!
             <form>
-            {errors.map(error => (
-              <p key={error}>Error: {error}</p>
-              ))}
               <TextField
                 value = {this.state.name}
                 onChange={evt => this.setState({ name: evt.target.value })}
@@ -102,6 +116,7 @@ class SimpleModal extends React.Component {
                 label="Activity Name"
                 margin="normal"
                 variant="outlined"
+                fullWidth="true"
               />
               <TextField
                 value = {this.state.link}
@@ -111,7 +126,11 @@ class SimpleModal extends React.Component {
                 label="Playlist Link"
                 margin="normal"
                 variant="outlined"
+                fullWidth="true"
               />
+              {errors.map(error => (
+                <p style={getModalStyle()} className={classes.error} key={error}>Error: {error}</p>
+                ))}
             </form>
             <Button onClick={this.handleSubmit}>Submit</Button>
             </Typography>

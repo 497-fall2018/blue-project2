@@ -15,6 +15,7 @@ import { IconButton } from '@material-ui/core';
 import { connect } from 'react-redux'
 import { updateActivity } from '../actions/actionCreator'
 import { bindActionCreators } from 'redux'
+import SimpleModalWrapped from './SimpleModal.js'
 
 const suggestions = [
   { label: 'Running' },
@@ -42,7 +43,6 @@ function renderInputComponent(inputProps) {
             <IconButton classes={{
               root: classes.btn
             }}><Search /></IconButton>
-
           </InputAdornment>
         ),
         classes: {
@@ -107,6 +107,9 @@ const styles = theme => ({
     flexGrow: 1,
     color: 'white',
   },
+  icon: {
+    margin: theme.spacing.unit *2,
+  },
   btn: {
     flexGrow: 1,
     color: 'white',
@@ -157,9 +160,13 @@ class IntegrationAutosuggest extends React.Component {
     this.state = {
       single: '',
       suggestions: [],
+      open: false
     }
   }
 
+  handleOpenModal = () => {
+    this.setState({open : true});
+  }
 
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
@@ -233,9 +240,10 @@ class IntegrationAutosuggest extends React.Component {
             <Paper {...options.containerProps} square>
                 {options.children}
                 {options.children ?
-                    (<Button>
-                        Add new activity
-                    </Button>)
+                    (<div>
+                      <Button onClick={this.handleOpenModal}>Open Modal</Button>
+                        <SimpleModalWrapped open={this.state.open}/>
+                      </div>)
                         :
                     null
                 }

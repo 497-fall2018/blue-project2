@@ -19,6 +19,8 @@ import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import SimpleModalWrapped from './component/SimpleModal.js'
+import Add from '@material-ui/icons/Add'
+import { IconButton } from '@material-ui/core';
 
 
 class App extends Component {
@@ -28,6 +30,7 @@ class App extends Component {
     super();
     this.state = {
       //activity: '',
+      open:false,
       activity_src: '',
       playlists: []
     }
@@ -120,7 +123,8 @@ class App extends Component {
                     <Typography align='left' color='inherit' variant="h5" gutterBottom>
                       DJ Produ saves your favorite beats all across platforms. Type your task and you are ready to go!
                     </Typography>
-                      <SimpleModalWrapped />
+                    <IconButton onClick={this.handleOpenModal}><Add/></IconButton>
+                      <SimpleModalWrapped open={this.state.open}/>
                   <div style={{ marginTop: 20 }}>
                       <Autosu />
 
