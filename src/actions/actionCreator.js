@@ -1,4 +1,5 @@
-import { UPDATE_ACTIVITY } from './actionTypes'
+import { UPDATE_ACTIVITY, GET_PLAYLISTS } from './actionTypes'
+
 
 
 export const updateActivity = (activity) => ({

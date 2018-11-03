@@ -20,6 +20,23 @@
   color:white;
 }
 
+
+#NUdiv, #soundclouddiv {
+  height:50%;
+  display: none;
+  margin-top: 10%;
+}
+
+.spotifydiv {
+  height:50%;
+  display:none;
+}
+
+
+.SpotifyPlayer {
+  margin-top: 10%;
+}
+
 .RecPart{
   z-index:1;
   flex:3;
@@ -37,6 +54,11 @@
 
 }
 
+.platformIcon:hover, .spIcon:hover {
+  cursor:pointer;
+}
+
+
 .platformIcon{
   height: 70px;
   margin-left: 20px;
@@ -44,6 +66,7 @@
  .spIcon{
   height: 75px;
 }
+
 
 .greyContainer{
  

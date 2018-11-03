@@ -16,19 +16,30 @@ import background_video from './background.mp4';
 import background_video2 from './DJ_Audio.mp4';
 import * as fromP from './reducers/getPlaylist'
 // import gql from "graphql-tag";
+import SpotifyPlayer from 'react-spotify-player';
 
 
+const size = {
+  width: '100%',
+  height: '100%',
+};
+const view = 'list'; // or 'coverart'
+const theme = 'black'; // or 'white'
 
 class App extends Component {
 
-  constructor() {
 
+  constructor() {
     super();
     this.state = {
       //activity: '',
       activity_src: '',
-      playlists: []
+      playlists: [],
+      spotify_clicked: false,
+      soundcloud_clicked: false,
+      NU_clicked: false
     }
+
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -54,6 +65,45 @@ class App extends Component {
 
   componentDidMount() {
 
+  }
+
+  handleSpotifyClick() {
+    if (this.state.spotify_clicked == false) {
+      document.getElementById("spotifydiv").style.display = "block";
+      document.getElementById("soundclouddiv").style.display = "none";
+      document.getElementById("NUdiv").style.display = "none";
+      this.setState({
+        spotify_clicked: true,
+        soundcloud_clicked: false,
+        NU_clicked: false
+      });
+    }
+  }
+
+  handleSoundcloudClick() {
+    if (this.state.soundcloud_clicked == false) {
+      document.getElementById("soundclouddiv").style.display = "block";
+      document.getElementById("spotifydiv").style.display = "none";
+      document.getElementById("NUdiv").style.display = "none";
+      this.setState({
+        soundcloud_clicked: true,
+        spotify_clicked: false,
+        NU_clicked: false
+      });
+    }
+  }
+
+  handleNUClick() {
+    if (this.state.NU_clicked == false) {
+      document.getElementById("NUdiv").style.display = "block";
+      document.getElementById("spotifydiv").style.display = "none";
+      document.getElementById("soundclouddiv").style.display = "none";
+      this.setState({
+        NU_clicked: true,
+        spotify_clicked: false,
+        soundcloud_clicked: false
+      });
+    }
   }
 
   render() {
@@ -101,17 +151,11 @@ class App extends Component {
                     </div>
                   </Grid>
                 </div>
-
-
               </div>
-
-
-
             </form>
-
-
-
           </section>
+
+
         </div>
 
         <div className="RecPart">
@@ -122,9 +166,12 @@ class App extends Component {
             style={{ textAlign: "left", padding: 20 }}
             wrap="wrap"
           >
-            <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} />
-            <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} />
+            <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)} />
+            <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
             <img alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} />
+            <img id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} onClick={(e) => this.handleNUClick(e)} />
+
+
           </Grid>
 
           <div className="greyContainer">
@@ -134,6 +181,24 @@ class App extends Component {
 
               </div>
             </div>
+
+            <div className="spotifydiv" id="spotifydiv">
+              <SpotifyPlayer
+                uri="spotify:playlist:37i9dQZEVXbLRQDuF5jeBp"
+                size={size}
+                view={view}
+                theme={theme}
+              />
+            </div>
+
+            <div id="NUdiv">
+              <iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            </div>
+
+            <div id="soundclouddiv">
+              <iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/212094702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            </div>
+
           </div>
 
 
