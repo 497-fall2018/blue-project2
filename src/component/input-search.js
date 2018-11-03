@@ -11,23 +11,16 @@ import { withStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Search from '@material-ui/icons/Search'
 import { IconButton } from '@material-ui/core';
-import { connect } from 'react-redux'
-import { updateActivity, get_playlists } from '../actions/actionCreator'
-import { bindActionCreators } from 'redux'
-import * as fromPlaylists from '../reducers/getPlaylist'
-const suggestions = [
-  { label: 'Running' },
-  { label: 'Reading' },
-  { label: 'Studying' },
-  { label: 'Working Out' },
-  { label: 'Eating' },
-  { label: 'Sleeping' },
-  { label: 'Relaxing' },
-];
+import { connect } from 'react-redux';
+import { updateActivity, get_playlists } from '../actions/actionCreator';
+import { bindActionCreators } from 'redux';
+import * as fromPlaylists from '../reducers/getPlaylist';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 function renderInputComponent(inputProps) {
-  const { classes, inputRef = () => { }, ref, ...other } = inputProps;
-
+  const { data, classes, inputRef = () => { }, ref, ...other } = inputProps;
+  const playlists = data.playlists;
   return (
     <TextField
       fullWidth
@@ -48,6 +41,7 @@ function renderInputComponent(inputProps) {
           input: classes.input,
           underline: classes.whiteUnderline
         },
+        data: { playlists },
       }}
       {...other}
     />
@@ -55,8 +49,8 @@ function renderInputComponent(inputProps) {
 }
 
 function renderSuggestion(suggestion, { query, isHighlighted }) {
-  const matches = match(suggestion.label, query);
-  const parts = parse(suggestion.label, matches);
+  const matches = match(suggestion.activity, query);
+  const parts = parse(suggestion.activity, matches);
 
   return (
     <MenuItem selected={isHighlighted} component="div">
@@ -77,16 +71,18 @@ function renderSuggestion(suggestion, { query, isHighlighted }) {
   );
 }
 
-function getSuggestions(value) {
+function getSuggestions(value, playlists) {
+
   const inputValue = deburr(value.trim()).toLowerCase();
   const inputLength = inputValue.length;
   let count = 0;
 
   return inputLength === 0
     ? []
-    : suggestions.filter(suggestion => {
+    : playlists.filter(playlist => {
+
       const keep =
-        count < 5 && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
+        count < 5 && playlist.activity.slice(0, inputLength).toLowerCase() === inputValue;
 
       if (keep) {
         count += 1;
@@ -97,7 +93,8 @@ function getSuggestions(value) {
 }
 
 function getSuggestionValue(suggestion) {
-  return suggestion.label;
+
+  return suggestion.activity;
 }
 
 const styles = theme => ({
@@ -160,11 +157,11 @@ class IntegrationAutosuggest extends React.Component {
   }
 
 
-  handleSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value),
-    });
+  handleSuggestionsFetchRequested = (playlists) => ({ value }) => {
+
+    this.setState({ suggestions: getSuggestions(value, playlists) });
   };
+
   handleSuggestionsClearRequested = () => {
     this.setState({
       suggestions: [],
@@ -172,11 +169,6 @@ class IntegrationAutosuggest extends React.Component {
   };
   handleKeyDown = (name) => (event) => {
     this.props.updateActivity(this.state.single);
-
-    // if (event.key == 'Enter') {
-    //   this.props.updateActivity(this.state.single);
-    //   console.log(this.props.updateActivity(this.state.single))
-    // }
   }
   handleChange = (name) => (event, { newValue }) => {
     this.setState({
@@ -186,12 +178,12 @@ class IntegrationAutosuggest extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, data } = this.props;
+    const playlists = data.playlists;
     const autosuggestProps = {
       renderInputComponent,
       suggestions: this.state.suggestions,
-      onSuggestionsFetchRequested: this.handleSuggestionsFetchRequested,
+      onSuggestionsFetchRequested: this.handleSuggestionsFetchRequested(playlists),
       onSuggestionsClearRequested: this.handleSuggestionsClearRequested,
       handleKeyDown: this.handleKeyDown,
       getSuggestionValue,
@@ -203,6 +195,7 @@ class IntegrationAutosuggest extends React.Component {
         <Autosuggest
           {...autosuggestProps}
           inputProps={{
+            data,
             classes,
             placeholder: 'Insert your activity here!',
             value: this.state.single,
@@ -236,4 +229,12 @@ const mapDispatchToProps = (dispatch) => {
     updateActivity
   }, dispatch)
 }
-export default withStyles(styles)(connect(null, mapDispatchToProps)(IntegrationAutosuggest));
+export default withStyles(styles)(connect(null, mapDispatchToProps)(graphql(gql`
+query {
+    playlists{
+      id,
+      activity,
+      activity_src
+    }
+  }
+`)(IntegrationAutosuggest)));

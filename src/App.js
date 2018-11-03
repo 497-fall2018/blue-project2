@@ -131,11 +131,11 @@ class App extends Component {
             <div id="rec" class="w3-third w3-margin-bottom">
               <div class="w3-container w3-white">
                 {fromP.aplaylist(this.props.activity)}
-                <iframe className="iframe" allow="encrypted-media" id="user_playlist" width="75%" height="600" scrolling="no" frameborder="no" src={this.state.activity_src}></iframe>
+
               </div>
             </div>
           </div>
-          {/* {fromP.playlists()} */}
+
 
         </div>
       </div>
