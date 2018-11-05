@@ -244,14 +244,6 @@ class IntegrationAutosuggest extends React.Component {
           renderSuggestionsContainer={options => (
             <Paper {...options.containerProps} square>
                 {options.children}
-                {options.children ?
-                    (<div>
-                      <Button onClick={this.handleOpenModal}>Open Modal</Button>
-                        <SimpleModalWrapped open={this.state.open}/>
-                      </div>)
-                        :
-                    null
-                }
             </Paper>
           )}
         />
