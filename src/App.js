@@ -123,8 +123,6 @@ class App extends Component {
                     <Typography align='left' color='inherit' variant="h5" gutterBottom>
                       DJ Produ saves your favorite beats all across platforms. Type your task and you are ready to go!
                     </Typography>
-                    <IconButton onClick={this.handleOpenModal}><Add/></IconButton>
-                      <SimpleModalWrapped open={this.state.open}/>
                   <div style={{ marginTop: 20 }}>
                       <Autosu />
 

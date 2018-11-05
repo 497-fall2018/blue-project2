@@ -5,20 +5,20 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Add from '@material-ui/icons/Add'
+import { IconButton } from '@material-ui/core';
 
 
-function getModalStyle() {
+ function getModalStyle() {
   const top = 50;
   const left = 50;
-
-  return {
+   return {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
-
-const styles = theme => ({
+ const styles = theme => ({
   paper: {
     position: 'absolute',
     width: theme.spacing.unit * 50,
@@ -30,52 +30,40 @@ const styles = theme => ({
   },
 
   error: {
-    color: 'red',
-    fontSize: '16px',
-    marginLeft: theme.spacing.unit * 25,
-    marginTop: '30px',
-    // marginBottom: '-10px',
-    width: theme.spacing.unit * 50,
-  }
+  color: 'red',
+  fontSize: '16px',
+  marginLeft: theme.spacing.unit * 25,
+  marginTop: '30px',
+  // marginBottom: '-10px',
+  width: theme.spacing.unit * 50,
+}
 });
-
-    function validate(name, link) {
+     function validate(name, link) {
     // we are going to store errors for all fields
     // in a signle array
     const errors = [];
-
-    if (name.length === 0) {
+     if (name.length === 0) {
       errors.push("Please enter an activity name");
     }
-
-    if (link.length === 0) {
+     if (link.length === 0) {
       errors.push("Please enter a playlist link");
     }
-
-    return errors;
+     return errors;
   }
-
-class SimpleModal extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      open: false,
-      name: '',
-      link:'',
-      errors: []
-  }
+ class SimpleModal extends React.Component {
+  state = {
+    open: false,
+    name: '',
+    link:'',
+    errors: []
   };
-
-  // handleOpen = (o) => {
-  //   this.setState({ open: o });
-  // };
-
-  handleClose = () => {
+   handleOpen = () => {
+    this.setState({ open: true });
+  };
+   handleClose = () => {
     this.setState({ open: false });
   };
-
-  handleSubmit = (e) => {
+   handleSubmit = (e) => {
     e.preventDefault();
     const {name, link} = this.state;
     const errors = validate(name, link);
@@ -86,22 +74,17 @@ class SimpleModal extends React.Component {
       this.setState({open: false});
 
     }
-
-  };
-
-  componentDidMount() {
-    this.setState({ open: this.props.open });
-  }
-
-  render() {
+   };
+   render() {
     const { classes } = this.props;
     const {errors} = this.state;
     return (
       <div>
+        <IconButton style={{color: 'white'}} onClick={this.handleOpen}><Add/></IconButton>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.props.open}
+          open={this.state.open}
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
@@ -116,7 +99,7 @@ class SimpleModal extends React.Component {
                 label="Activity Name"
                 margin="normal"
                 variant="outlined"
-                fullWidth="true"
+                fullWidth='true'
               />
               <TextField
                 value = {this.state.link}
@@ -126,11 +109,11 @@ class SimpleModal extends React.Component {
                 label="Playlist Link"
                 margin="normal"
                 variant="outlined"
-                fullWidth="true"
+                fullWidth='true'
               />
-              {errors.map(error => (
-                <p style={getModalStyle()} className={classes.error} key={error}>Error: {error}</p>
-                ))}
+            {errors.map(error => (
+              <p style={getModalStyle()} className={classes.error} key={error}>Error: {error}</p>
+              ))}
             </form>
             <Button onClick={this.handleSubmit}>Submit</Button>
             </Typography>
@@ -140,12 +123,9 @@ class SimpleModal extends React.Component {
     );
   }
 }
-
-SimpleModal.propTypes = {
+ SimpleModal.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
-// We need an intermediary variable for handling the recursive nesting.
+ // We need an intermediary variable for handling the recursive nesting.
 const SimpleModalWrapped = withStyles(styles)(SimpleModal);
-
-export default SimpleModalWrapped;
+ export default SimpleModalWrapped;

@@ -43,6 +43,7 @@ function renderInputComponent(inputProps) {
             <IconButton classes={{
               root: classes.btn
             }}><Search /></IconButton>
+          <SimpleModalWrapped/>
           </InputAdornment>
         ),
         classes: {
