@@ -83,11 +83,11 @@ function getSuggestions(value, playlists) {
   const inputValue = deburr(value.trim()).toLowerCase();
   const inputLength = inputValue.length;
   let count = 0;
+  console.log(inputValue);
 
   return inputLength === 0
     ? []
     : playlists.filter(playlist => {
-
       const keep =
         count < 5 && playlist.activity.slice(0, inputLength).toLowerCase() === inputValue;
 
@@ -182,7 +182,7 @@ class IntegrationAutosuggest extends React.Component {
     });
   };
   handleKeyDown = (name) => (event) => {
-    this.props.updateActivity(this.state.single);
+    this.props.updateActivity(this.state.single.toLowerCase());
   }
   handleChange = (name) => (event, { newValue }) => {
     this.setState({

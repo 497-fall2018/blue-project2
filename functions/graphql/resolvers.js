@@ -11,7 +11,7 @@ module.exports = {
     aplaylist(obj, args, context, info) {
       return playlistsRef.once('value').then(snapshot => {
         const playlists = snapshot.val();
-        return Object.values(playlists).filter(p => p.activity === args.activity);
+        return Object.values(playlists).filter(p => p.activity.toLowerCase() === args.activity);
       })
     },
     playlists() {
