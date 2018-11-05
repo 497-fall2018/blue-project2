@@ -1,13 +1,35 @@
 DJPrudo - Your Personal Music Creation App
 
-Dependencies: typeaway.js for React
-https://github.com/ericgio/react-bootstrap-typeahead
 
 To download firebase:
 
 ```
 yarn add firebase --dev
 ```
+To use firebase cloud functions:
+```
+cd functions/
+npm i firebase-functions
+npm i firebase-admin
+```
+
+To use graphql with apollo-server and react-apollo:
+```
+npm i graphql-tag
+npm i react-apollo
+npm i apollo-boost
+
+cd functions/
+npm i cors
+npm i express
+npm i graphql
+npm i graphql-tools
+npm i apollo-server
+npm i apollo-server-express
+
+
+```
+
 
 To use material-ui:
 ```
@@ -20,7 +42,7 @@ npm i @material-ui/icons
 ```
 
 
-To download Typeaway for React: 
+To download Typeaway for React (https://github.com/ericgio/react-bootstrap-typeahead): 
 
 ```
 yarn add react-bootstrap-typeahead
@@ -46,6 +68,13 @@ To download react-googlemap:
 ```
 npm install --save google-maps-react
 ```
+
+To download Spotify player:
+
+```
+npm install react-spotify-player
+```
+
 
 
 When things are broken, please try:

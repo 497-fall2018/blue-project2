@@ -22,38 +22,39 @@ import SimpleModalWrapped from './component/SimpleModal.js'
 import Add from '@material-ui/icons/Add'
 import { IconButton } from '@material-ui/core';
 
+import * as fromP from './reducers/getPlaylist'
+// import gql from "graphql-tag";
+import SpotifyPlayer from 'react-spotify-player';
+
+
+const size = {
+  width: '100%',
+  height: '100%',
+};
+const view = 'list'; // or 'coverart'
+const theme = 'black'; // or 'white'
 
 class App extends Component {
 
-  constructor() {
 
+  constructor() {
     super();
     this.state = {
       //activity: '',
       open:false,
       activity_src: '',
-      playlists: []
+      playlists: [],
+      spotify_clicked: false,
+      soundcloud_clicked: false,
+      NU_clicked: false
     }
+
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    var temp_url = ''
-    for (let p in this.state.playlists) {
-      if (this.state.playlists[p].activity.toUpperCase() == this.props.activity.toUpperCase()) {
-        //console.log(this.state.playlists[p].activity)
-        temp_url = this.state.playlists[p].activity_src;
-        //console.log(temp_url);
-        break;
-
-      }
-    }
-    this.setState({
-      activity_src: temp_url,
-    });
-    console.log(this.state.activity_src)
   }
 
   handleOpenModal = () => {
@@ -65,28 +66,50 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const playlistsRef = firebase.database().ref('playlists');
-    playlistsRef.on('value', (snapshot) => {
-      let playlists = snapshot.val();
-      let newState = [];
 
-      for (let p in playlists) {
-        newState.push({
-          id: p,
-          activity: playlists[p].activity,
-          activity_src: playlists[p].activity_src
-        });
-      }
+  }
 
+  handleSpotifyClick() {
+    if (this.state.spotify_clicked == false) {
+      document.getElementById("spotifydiv").style.display = "block";
+      document.getElementById("soundclouddiv").style.display = "none";
+      document.getElementById("NUdiv").style.display = "none";
       this.setState({
-        playlists: newState,
-
+        spotify_clicked: true,
+        soundcloud_clicked: false,
+        NU_clicked: false
       });
+    }
+  }
 
-    });
+  handleSoundcloudClick() {
+    if (this.state.soundcloud_clicked == false) {
+      document.getElementById("soundclouddiv").style.display = "block";
+      document.getElementById("spotifydiv").style.display = "none";
+      document.getElementById("NUdiv").style.display = "none";
+      this.setState({
+        soundcloud_clicked: true,
+        spotify_clicked: false,
+        NU_clicked: false
+      });
+    }
+  }
+
+  handleNUClick() {
+    if (this.state.NU_clicked == false) {
+      document.getElementById("NUdiv").style.display = "block";
+      document.getElementById("spotifydiv").style.display = "none";
+      document.getElementById("soundclouddiv").style.display = "none";
+      this.setState({
+        NU_clicked: true,
+        spotify_clicked: false,
+        soundcloud_clicked: false
+      });
+    }
   }
 
   render() {
+
     var user_requested_activity = "";
     var requested_url = "";
     for (let p in this.state.playlists) {
@@ -117,6 +140,7 @@ class App extends Component {
                     alignItems="left"
 
                   >
+
                     <Typography align='left' color='inherit' component="h2" variant="h1" gutterBottom>
                       DJ Produ
                     </Typography>
@@ -129,17 +153,11 @@ class App extends Component {
                     </div>
                   </Grid>
                 </div>
-
-
               </div>
-
-
-
             </form>
-
-
-
           </section>
+
+
         </div>
 
         <div className="RecPart">
@@ -150,18 +168,41 @@ class App extends Component {
             style={{ textAlign: "left", padding: 20 }}
             wrap="wrap"
           >
-            <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} />
-            <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} />
+            <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)} />
+            <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
             <img alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} />
+            <img id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} onClick={(e) => this.handleNUClick(e)} />
+
+
           </Grid>
 
           <div className="greyContainer">
             <div id="rec" class="w3-third w3-margin-bottom">
               <div class="w3-container w3-white">
-                <iframe className="iframe" allow="encrypted-media" id="user_playlist" width="75%" height="400" scrolling="no" frameborder="no" src={this.state.activity_src}></iframe>
+                {fromP.aplaylist(this.props.activity)}
+
               </div>
             </div>
+
+            <div className="spotifydiv" id="spotifydiv">
+              <SpotifyPlayer
+                uri="spotify:playlist:37i9dQZEVXbLRQDuF5jeBp"
+                size={size}
+                view={view}
+                theme={theme}
+              />
+            </div>
+
+            <div id="NUdiv">
+              <iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            </div>
+
+            <div id="soundclouddiv">
+              <iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/212094702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            </div>
+
           </div>
+
 
         </div>
       </div>
@@ -170,7 +211,10 @@ class App extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  return { activity: state.activReducer.activity }
+  console.log(state);
+  return {
+    activity: state.activReducer.activity
+  }
 }
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
