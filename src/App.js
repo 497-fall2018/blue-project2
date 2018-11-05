@@ -46,21 +46,6 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.props.activity);
-    var temp_url = ''
-    for (let p in this.state.playlists) {
-      if (this.state.playlists[p].activity.toUpperCase() == this.props.activity.toUpperCase()) {
-        //console.log(this.state.playlists[p].activity)
-        temp_url = this.state.playlists[p].activity_src;
-        //console.log(temp_url);
-        break;
-
-      }
-    }
-    this.setState({
-      activity_src: temp_url,
-    });
-
   }
 
   componentDidMount() {

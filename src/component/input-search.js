@@ -19,8 +19,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 function renderInputComponent(inputProps) {
-  const { data, classes, inputRef = () => { }, ref, ...other } = inputProps;
-  const playlists = data.playlists;
+  const { classes, inputRef = () => { }, ref, ...other } = inputProps;
   return (
     <TextField
       fullWidth
@@ -31,17 +30,16 @@ function renderInputComponent(inputProps) {
         },
         endAdornment: (
           <InputAdornment position="start">
-            <IconButton classes={{
+            <Search classes={{
               root: classes.btn
-            }}><Search /></IconButton>
+            }} />
 
           </InputAdornment>
         ),
         classes: {
           input: classes.input,
           underline: classes.whiteUnderline
-        },
-        data: { playlists },
+        }
       }}
       {...other}
     />
@@ -195,7 +193,6 @@ class IntegrationAutosuggest extends React.Component {
         <Autosuggest
           {...autosuggestProps}
           inputProps={{
-            data,
             classes,
             placeholder: 'Insert your activity here!',
             value: this.state.single,
