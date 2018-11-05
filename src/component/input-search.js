@@ -5,18 +5,35 @@ import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Search from '@material-ui/icons/Search'
 import { IconButton } from '@material-ui/core';
+import { connect } from 'react-redux'
+import { updateActivity } from '../actions/actionCreator'
+import { bindActionCreators } from 'redux'
+import SimpleModalWrapped from './SimpleModal.js'
+
+const suggestions = [
+  { label: 'Running' },
+  { label: 'Reading' },
+  { label: 'Studying' },
+  { label: 'Working Out' },
+  { label: 'Eating' },
+  { label: 'Sleeping' },
+  { label: 'Relaxing' },
+];
+
 import { connect } from 'react-redux';
 import { updateActivity, get_playlists } from '../actions/actionCreator';
 import { bindActionCreators } from 'redux';
 import * as fromPlaylists from '../reducers/getPlaylist';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+
 
 function renderInputComponent(inputProps) {
   const { classes, inputRef = () => { }, ref, ...other } = inputProps;
@@ -32,6 +49,9 @@ function renderInputComponent(inputProps) {
           <InputAdornment position="start">
             <Search classes={{
               root: classes.btn
+
+            }}><Search /></IconButton>
+          <SimpleModalWrapped/>
             }} />
 
           </InputAdornment>
@@ -101,6 +121,9 @@ const styles = theme => ({
     flexGrow: 1,
     color: 'white',
   },
+  icon: {
+    margin: theme.spacing.unit *2,
+  },
   btn: {
     flexGrow: 1,
     color: 'white',
@@ -151,9 +174,13 @@ class IntegrationAutosuggest extends React.Component {
     this.state = {
       single: '',
       suggestions: [],
+      open: false
     }
   }
 
+  handleOpenModal = () => {
+    this.setState({open : true});
+  }
 
   handleSuggestionsFetchRequested = (playlists) => ({ value }) => {
 
@@ -176,6 +203,7 @@ class IntegrationAutosuggest extends React.Component {
   };
 
   render() {
+
     const { classes, data } = this.props;
     const playlists = data.playlists;
     const autosuggestProps = {
@@ -187,6 +215,19 @@ class IntegrationAutosuggest extends React.Component {
       getSuggestionValue,
       renderSuggestion,
     };
+
+    function renderSuggestionContainerWithChildren(options)
+    {
+      return (
+          <Paper {...options.containerProps} square>
+            {options.children}
+            <Button>
+              Add new stuff
+            </Button>
+          </Paper>
+      );
+    }
+
     return (
 
       <div className={classes.root}>
@@ -207,7 +248,15 @@ class IntegrationAutosuggest extends React.Component {
           }}
           renderSuggestionsContainer={options => (
             <Paper {...options.containerProps} square>
-              {options.children}
+                {options.children}
+                {options.children ?
+                    (<div>
+                      <Button onClick={this.handleOpenModal}>Open Modal</Button>
+                        <SimpleModalWrapped open={this.state.open}/>
+                      </div>)
+                        :
+                    null
+                }
             </Paper>
           )}
         />

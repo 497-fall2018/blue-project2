@@ -14,6 +14,14 @@ import { updateActivity } from './actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import background_video from './background.mp4';
 import background_video2 from './DJ_Audio.mp4';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import SimpleModalWrapped from './component/SimpleModal.js'
+import Add from '@material-ui/icons/Add'
+import { IconButton } from '@material-ui/core';
+
 import * as fromP from './reducers/getPlaylist'
 // import gql from "graphql-tag";
 import SpotifyPlayer from 'react-spotify-player';
@@ -33,6 +41,7 @@ class App extends Component {
     super();
     this.state = {
       //activity: '',
+      open:false,
       activity_src: '',
       playlists: [],
       spotify_clicked: false,
@@ -46,6 +55,14 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+  }
+
+  handleOpenModal = () => {
+    this.setState({open : true});
+  }
+
+  handleClose = () => {
+    this.setState({open : false});
   }
 
   componentDidMount() {
@@ -129,8 +146,8 @@ class App extends Component {
                     </Typography>
                     <Typography align='left' color='inherit' variant="h5" gutterBottom>
                       DJ Produ saves your favorite beats all across platforms. Type your task and you are ready to go!
-      </Typography>
-                    <div style={{ marginTop: 20 }}>
+                    </Typography>
+                  <div style={{ marginTop: 20 }}>
                       <Autosu />
 
                     </div>
