@@ -13,9 +13,12 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Search from '@material-ui/icons/Search'
 import { IconButton } from '@material-ui/core';
 import { connect } from 'react-redux'
-import { updateActivity } from '../actions/actionCreator'
-import { bindActionCreators } from 'redux'
 import SimpleModalWrapped from './SimpleModal.js'
+import { updateActivity, get_playlists } from '../actions/actionCreator';
+import { bindActionCreators } from 'redux';
+import * as fromPlaylists from '../reducers/getPlaylist';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const suggestions = [
   { label: 'Running' },
@@ -26,13 +29,6 @@ const suggestions = [
   { label: 'Sleeping' },
   { label: 'Relaxing' },
 ];
-
-import { connect } from 'react-redux';
-import { updateActivity, get_playlists } from '../actions/actionCreator';
-import { bindActionCreators } from 'redux';
-import * as fromPlaylists from '../reducers/getPlaylist';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 
 
 function renderInputComponent(inputProps) {
@@ -47,12 +43,11 @@ function renderInputComponent(inputProps) {
         },
         endAdornment: (
           <InputAdornment position="start">
-            <Search classes={{
+            <IconButton classes={{
               root: classes.btn
 
             }}><Search /></IconButton>
           <SimpleModalWrapped/>
-            }} />
 
           </InputAdornment>
         ),
