@@ -20,17 +20,6 @@ import * as fromPlaylists from '../reducers/getPlaylist';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-const suggestions = [
-  { label: 'Running' },
-  { label: 'Reading' },
-  { label: 'Studying' },
-  { label: 'Working Out' },
-  { label: 'Eating' },
-  { label: 'Sleeping' },
-  { label: 'Relaxing' },
-];
-
-
 function renderInputComponent(inputProps) {
   const { classes, inputRef = () => { }, ref, ...other } = inputProps;
   return (
@@ -41,13 +30,18 @@ function renderInputComponent(inputProps) {
           ref(node);
           inputRef(node);
         },
-        endAdornment: (
+        startAdornment: (
           <InputAdornment position="start">
-            <IconButton classes={{
+            <Search classes={{
               root: classes.btn
 
-            }}><Search /></IconButton>
-          <SimpleModalWrapped/>
+            }} />
+          </InputAdornment>
+        ),
+        endAdornment: (
+          <InputAdornment position="start">
+
+            <SimpleModalWrapped />
 
           </InputAdornment>
         ),
@@ -117,7 +111,7 @@ const styles = theme => ({
     color: 'white',
   },
   icon: {
-    margin: theme.spacing.unit *2,
+    margin: theme.spacing.unit * 2,
   },
   btn: {
     flexGrow: 1,
@@ -174,7 +168,7 @@ class IntegrationAutosuggest extends React.Component {
   }
 
   handleOpenModal = () => {
-    this.setState({open : true});
+    this.setState({ open: true });
   }
 
   handleSuggestionsFetchRequested = (playlists) => ({ value }) => {
@@ -211,15 +205,14 @@ class IntegrationAutosuggest extends React.Component {
       renderSuggestion,
     };
 
-    function renderSuggestionContainerWithChildren(options)
-    {
+    function renderSuggestionContainerWithChildren(options) {
       return (
-          <Paper {...options.containerProps} square>
-            {options.children}
-            <Button>
-              Add new stuff
+        <Paper {...options.containerProps} square>
+          {options.children}
+          <Button>
+            Add new stuff
             </Button>
-          </Paper>
+        </Paper>
       );
     }
 
@@ -243,7 +236,7 @@ class IntegrationAutosuggest extends React.Component {
           }}
           renderSuggestionsContainer={options => (
             <Paper {...options.containerProps} square>
-                {options.children}
+              {options.children}
             </Paper>
           )}
         />
