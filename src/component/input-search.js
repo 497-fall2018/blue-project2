@@ -83,7 +83,6 @@ function getSuggestions(value, playlists) {
   const inputValue = deburr(value.trim()).toLowerCase();
   const inputLength = inputValue.length;
   let count = 0;
-  console.log(inputValue);
 
   return inputLength === 0
     ? []
@@ -258,7 +257,6 @@ const mapDispatchToProps = (dispatch) => {
 export default withStyles(styles)(connect(null, mapDispatchToProps)(graphql(gql`
 query {
     playlists{
-      id,
       activity,
       activity_src
     }

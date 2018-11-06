@@ -9,7 +9,14 @@ import Add from '@material-ui/icons/Add'
 import { IconButton } from '@material-ui/core';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-
+const playlistquery = gql`
+query {
+    playlists{
+      activity,
+      activity_src
+    }
+  }
+`
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -125,7 +132,7 @@ class SimpleModal extends React.Component {
                   label="Activity Name"
                   margin="normal"
                   variant="outlined"
-                  fullWidth='true'
+                  fullWidth={true}
                 />
                 <TextField
                   value={this.state.link}
@@ -135,7 +142,7 @@ class SimpleModal extends React.Component {
                   label="Playlist Link"
                   margin="normal"
                   variant="outlined"
-                  fullWidth='true'
+                  fullWidth={true}
                 />
                 {errors.map(error => (
                   <p style={getModalStyle()} className={classes.error} key={error}>Error: {error}</p>
@@ -164,4 +171,14 @@ mutation createPlaylist($input: PlaylistCreateInput!){
   	activity_src
   }
 }
-`)(SimpleModalWrapped);
+`, {
+    options: {
+      update: (proxy, { data: { createPlaylist } }) => {
+        const { playlists } = proxy.readQuery({ query: playlistquery });
+        proxy.writeQuery({
+          query: playlistquery,
+          data: { playlists: playlists.concat(createPlaylist) }
+        });
+      },
+    }
+  })(SimpleModalWrapped);

@@ -11,14 +11,9 @@ type Playlist {
   activity: String
   activity_src: String
 }
-type Playlists {
-  id: Int!
-  activity: String
-  activity_src: String
-}
 type Query {
   aplaylist(activity: String): [Playlist]
-  playlists: [Playlists]
+  playlists: [Playlist]
   helloword: String
 }
 type Mutation {

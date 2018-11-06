@@ -17,14 +17,14 @@ module.exports = {
     playlists() {
       return playlistsRef.once('value').then(snapshot => {
         const playlists = snapshot.val();
-        return Object.keys(playlists).map(p => Object.assign({ id: p }, playlists[p]));
+        return Object.keys(playlists).map(p => Object.assign({}, playlists[p]));
       })
     }
   },
   Mutation: {
     createPlaylist: (obj, args, context, info) => {
       let input = args.input;
-      const playlist = [];
+      const playlist = [{ activity: args.input.activity, activity_src: args.input.activity_src }];
       new Promise((resolve) => {
         const playlist = playlistsRef.push(input, () => {
           resolve(Object.assign({}, input)
