@@ -7,18 +7,19 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Add from '@material-ui/icons/Add'
 import { IconButton } from '@material-ui/core';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-
- function getModalStyle() {
+function getModalStyle() {
   const top = 50;
   const left = 50;
-   return {
+  return {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
- const styles = theme => ({
+const styles = theme => ({
   paper: {
     position: 'absolute',
     width: theme.spacing.unit * 50,
@@ -30,57 +31,82 @@ import { IconButton } from '@material-ui/core';
   },
 
   error: {
-  color: 'red',
-  fontSize: '16px',
-  marginLeft: theme.spacing.unit * 25,
-  marginTop: '30px',
-  // marginBottom: '-10px',
-  width: theme.spacing.unit * 50,
-}
-});
-     function validate(name, link) {
-    // we are going to store errors for all fields
-    // in a signle array
-    const errors = [];
-     if (name.length === 0) {
-      errors.push("Please enter an activity name");
-    }
-     if (link.length === 0) {
-      errors.push("Please enter a playlist link");
-    }
-     return errors;
+    color: 'red',
+    fontSize: '16px',
+    marginLeft: theme.spacing.unit * 25,
+    marginTop: '30px',
+    // marginBottom: '-10px',
+    width: theme.spacing.unit * 50,
+  },
+
+  success: {
+    color: 'green',
+    fontSize: '16px',
+    marginLeft: theme.spacing.unit * 25,
+    marginTop: '30px',
+    // marginBottom: '-10px',
+    width: theme.spacing.unit * 50,
   }
- class SimpleModal extends React.Component {
-  state = {
-    open: false,
-    name: '',
-    link:'',
-    errors: []
-  };
-   handleOpen = () => {
+});
+function validate(name, link) {
+  // we are going to store errors for all fields
+  // in a signle array
+  const errors = [];
+  if (name.length === 0) {
+    errors.push("Please enter an activity name");
+  }
+  if (link.length === 0) {
+    errors.push("Please enter a playlist link");
+  }
+  return errors;
+}
+class SimpleModal extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false,
+      name: '',
+      link: '',
+      errors: [],
+      success: false
+    };
+  }
+
+  handleOpen = () => {
     this.setState({ open: true });
   };
-   handleClose = () => {
-    this.setState({ open: false });
+  handleClose = () => {
+    this.setState({ open: false, errors: [], success: false });
   };
-   handleSubmit = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    const {name, link} = this.state;
+    const { name, link } = this.state;
     const errors = validate(name, link);
     if (errors.length > 0) {
-      this.setState({errors});
+      this.setState({ errors });
     }
-    else{
-      this.setState({open: false});
+    else {
+      this.props.mutate({
+        variables: {
+          input: { activity: name, activity_src: link }
+        }
+      })
+      this.setState({
+        name: '',
+        link: '',
+        errors: [],
+        success: true
+      })
 
     }
-   };
-   render() {
+  };
+  render() {
     const { classes } = this.props;
-    const {errors} = this.state;
+    const { errors } = this.state;
+    const { success } = this.state;
     return (
       <div>
-        <IconButton style={{color: 'white'}} onClick={this.handleOpen}><Add/></IconButton>
+        <IconButton style={{ color: 'white' }} onClick={this.handleOpen}><Add /></IconButton>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -91,31 +117,34 @@ import { IconButton } from '@material-ui/core';
             <Typography variant="h6" id="modal-title">
               Add a new activity!
             <form>
-              <TextField
-                value = {this.state.name}
-                onChange={evt => this.setState({ name: evt.target.value })}
-                required
-                id="outlined-required"
-                label="Activity Name"
-                margin="normal"
-                variant="outlined"
-                fullWidth='true'
-              />
-              <TextField
-                value = {this.state.link}
-                onChange={evt => this.setState({ link: evt.target.value })}
-                required
-                id="outlined-required"
-                label="Playlist Link"
-                margin="normal"
-                variant="outlined"
-                fullWidth='true'
-              />
-            {errors.map(error => (
-              <p style={getModalStyle()} className={classes.error} key={error}>Error: {error}</p>
-              ))}
-            </form>
-            <Button onClick={this.handleSubmit}>Submit</Button>
+                <TextField
+                  value={this.state.name}
+                  onChange={evt => this.setState({ name: evt.target.value })}
+                  required
+                  id="outlined-required"
+                  label="Activity Name"
+                  margin="normal"
+                  variant="outlined"
+                  fullWidth='true'
+                />
+                <TextField
+                  value={this.state.link}
+                  onChange={evt => this.setState({ link: evt.target.value })}
+                  required
+                  id="outlined-required"
+                  label="Playlist Link"
+                  margin="normal"
+                  variant="outlined"
+                  fullWidth='true'
+                />
+                {errors.map(error => (
+                  <p style={getModalStyle()} className={classes.error} key={error}>Error: {error}</p>
+                ))}
+                {success ?
+                  <p style={getModalStyle()} className={classes.success}>Add successfully!</p> : null
+                }
+              </form>
+              <Button onClick={this.handleSubmit}>Submit</Button>
             </Typography>
           </div>
         </Modal>
@@ -123,9 +152,16 @@ import { IconButton } from '@material-ui/core';
     );
   }
 }
- SimpleModal.propTypes = {
+SimpleModal.propTypes = {
   classes: PropTypes.object.isRequired,
 };
- // We need an intermediary variable for handling the recursive nesting.
+// We need an intermediary variable for handling the recursive nesting.
 const SimpleModalWrapped = withStyles(styles)(SimpleModal);
- export default SimpleModalWrapped;
+export default graphql(gql`
+mutation createPlaylist($input: PlaylistCreateInput!){
+  createPlaylist(input: $input){
+    activity,
+  	activity_src
+  }
+}
+`)(SimpleModalWrapped);

@@ -4,7 +4,6 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-
 const get_a_playlist = gql`
 query Aplaylist($activity: String) {
     aplaylist(activity: $activity) {

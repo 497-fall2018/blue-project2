@@ -41,7 +41,7 @@ class App extends Component {
     super();
     this.state = {
       //activity: '',
-      open:false,
+      open: false,
       activity_src: '',
       playlists: [],
       spotify_clicked: false,
@@ -58,11 +58,11 @@ class App extends Component {
   }
 
   handleOpenModal = () => {
-    this.setState({open : true});
+    this.setState({ open: true });
   }
 
   handleClose = () => {
-    this.setState({open : false});
+    this.setState({ open: false });
   }
 
   componentDidMount() {
@@ -147,7 +147,7 @@ class App extends Component {
                     <Typography align='left' color='inherit' variant="h5" gutterBottom>
                       DJ Produ saves your favorite beats all across platforms. Type your task and you are ready to go!
                     </Typography>
-                  <div style={{ marginTop: 20 }}>
+                    <div style={{ marginTop: 20 }}>
                       <Autosu />
 
                     </div>
@@ -211,7 +211,7 @@ class App extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state);
+
   return {
     activity: state.activReducer.activity
   }

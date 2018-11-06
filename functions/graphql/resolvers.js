@@ -22,15 +22,17 @@ module.exports = {
     }
   },
   Mutation: {
-    createPlaylist(_, { input }) {
-      return (
-        new Promise((resolve) => {
-          const playlist = playlistsRef.push(input, () => {
-            resolve(Object.assign({ id: playlist.key }, input)
-            );
-          });
-        })
-      );
+    createPlaylist: (obj, args, context, info) => {
+      let input = args.input;
+      const playlist = [];
+      new Promise((resolve) => {
+        const playlist = playlistsRef.push(input, () => {
+          resolve(Object.assign({}, input)
+          );
+        }
+        );
+      })
+      return playlist;
     },
   }
 };
