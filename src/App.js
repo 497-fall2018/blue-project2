@@ -252,7 +252,7 @@ class App extends Component {
 
           <div className="greyContainer">
             <div id="rec" className="w3-third w3-margin-bottom">
-              <div className="w3-container w3-white">
+              <div className="resultiframe">
                 {fromP.aplaylist(this.props.activity)}
 
               </div>
@@ -272,12 +272,12 @@ class App extends Component {
             </div>
 
             <div id="soundclouddiv">
-              <iframe width="100%" height="100%" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/212094702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+              <iframe width="100%" height="100%" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/281743188&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
             </div>
 
 
             <div id="youtubediv">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLw-VjHDlEOgvtnnnqWlTqByAtC7tXBg6D" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div> 
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLw-VjHDlEOgvtnnnqWlTqByAtC7tXBg6D" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 
           </div>
