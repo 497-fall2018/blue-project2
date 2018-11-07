@@ -32,6 +32,10 @@
   display:none;
 }
 
+#youtubediv {
+  display:none;
+  margin-top: 10%;
+}
 
 .SpotifyPlayer {
   margin-top: 10%;

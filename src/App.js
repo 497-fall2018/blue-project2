@@ -46,6 +46,7 @@ class App extends Component {
       playlists: [],
       spotify_clicked: false,
       soundcloud_clicked: false,
+      youtube_clicked:false,
       NU_clicked: false
     }
 
@@ -74,10 +75,24 @@ class App extends Component {
       document.getElementById("spotifydiv").style.display = "block";
       document.getElementById("soundclouddiv").style.display = "none";
       document.getElementById("NUdiv").style.display = "none";
+      document.getElementById("youtubediv").style.display = "none";
       this.setState({
         spotify_clicked: true,
         soundcloud_clicked: false,
-        NU_clicked: false
+        NU_clicked: false,
+        youtube_clicked: false
+      });
+    }
+    else {
+      document.getElementById("spotifydiv").style.display = "none";
+      document.getElementById("soundclouddiv").style.display = "none";
+      document.getElementById("NUdiv").style.display = "none";
+      document.getElementById("youtubediv").style.display = "none";
+      this.setState({
+        spotify_clicked: false,
+        soundcloud_clicked: false,
+        NU_clicked: false,
+        youtube_clicked: false
       });
     }
   }
@@ -87,10 +102,24 @@ class App extends Component {
       document.getElementById("soundclouddiv").style.display = "block";
       document.getElementById("spotifydiv").style.display = "none";
       document.getElementById("NUdiv").style.display = "none";
+      document.getElementById("youtubediv").style.display = "none";
       this.setState({
         soundcloud_clicked: true,
         spotify_clicked: false,
-        NU_clicked: false
+        NU_clicked: false,
+        youtube_clicked: false
+      });
+    }
+    else {
+      document.getElementById("soundclouddiv").style.display = "none";
+      document.getElementById("spotifydiv").style.display = "none";
+      document.getElementById("NUdiv").style.display = "none";
+      document.getElementById("youtubediv").style.display = "none";
+      this.setState({
+        soundcloud_clicked: false,
+        spotify_clicked: false,
+        NU_clicked: false,
+        youtube_clicked: false
       });
     }
   }
@@ -100,13 +129,59 @@ class App extends Component {
       document.getElementById("NUdiv").style.display = "block";
       document.getElementById("spotifydiv").style.display = "none";
       document.getElementById("soundclouddiv").style.display = "none";
+      document.getElementById("youtubediv").style.display = "none";
       this.setState({
         NU_clicked: true,
         spotify_clicked: false,
-        soundcloud_clicked: false
+        soundcloud_clicked: false,
+        youtube_clicked: false
+      });
+    }
+    else {
+      document.getElementById("NUdiv").style.display = "none";
+      document.getElementById("spotifydiv").style.display = "none";
+      document.getElementById("soundclouddiv").style.display = "none";
+      document.getElementById("youtubediv").style.display = "none";
+      this.setState({
+        NU_clicked: false,
+        spotify_clicked: false,
+        soundcloud_clicked: false,
+        youtube_clicked: false
       });
     }
   }
+
+  handleYoutubeClick() {
+    if (this.state.youtube_clicked == false) {
+      document.getElementById("NUdiv").style.display = "none";
+      document.getElementById("spotifydiv").style.display = "none";
+      document.getElementById("soundclouddiv").style.display = "none";
+      document.getElementById("youtubediv").style.display = "block";
+      this.setState({
+        NU_clicked: false,
+        spotify_clicked: false,
+        soundcloud_clicked: false,
+        youtube_clicked: true
+      });
+    }
+    else {
+      document.getElementById("NUdiv").style.display = "none";
+      document.getElementById("spotifydiv").style.display = "none";
+      document.getElementById("soundclouddiv").style.display = "none";
+      document.getElementById("youtubediv").style.display = "none";
+      this.setState({
+        NU_clicked: false,
+        spotify_clicked: false,
+        soundcloud_clicked: false,
+        youtube_clicked: false
+      });
+    }
+  }
+
+
+
+
+
 
   render() {
 
@@ -169,7 +244,7 @@ class App extends Component {
           >
             <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)} />
             <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
-            <img alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} />
+            <img alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} onClick={(e) => this.handleYoutubeClick(e)} />
             <img id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} onClick={(e) => this.handleNUClick(e)} />
 
 
@@ -199,6 +274,11 @@ class App extends Component {
             <div id="soundclouddiv">
               <iframe width="100%" height="100%" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/212094702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
             </div>
+
+
+            <div id="youtubediv">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLw-VjHDlEOgvtnnnqWlTqByAtC7tXBg6D" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div> 
+
 
           </div>
 
