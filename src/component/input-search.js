@@ -261,4 +261,6 @@ query {
       activity_src
     }
   }
-`)(IntegrationAutosuggest)));
+`, {
+    options: { fetchPolicy: 'cache-and-network' },
+  })(IntegrationAutosuggest)));
