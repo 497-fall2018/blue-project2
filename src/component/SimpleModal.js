@@ -83,7 +83,13 @@ class SimpleModal extends React.Component {
     this.setState({ open: true });
   };
   handleClose = () => {
-    this.setState({ open: false, errors: [], success: false });
+    this.setState({
+      open: false,
+      name: '',
+      link: '',
+      errors: [],
+      success: false
+    });
   };
   handleSubmit = (e) => {
     e.preventDefault();

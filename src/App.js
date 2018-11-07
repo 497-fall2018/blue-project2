@@ -136,8 +136,6 @@ class App extends Component {
                   <Grid
                     container
                     direction="column"
-                    justify="left"
-                    alignItems="left"
 
                   >
 
@@ -162,6 +160,7 @@ class App extends Component {
 
         <div className="RecPart">
           <Grid
+            container
             direction="row"
             justify="flex-start"
             alignItems="center"
@@ -177,8 +176,8 @@ class App extends Component {
           </Grid>
 
           <div className="greyContainer">
-            <div id="rec" class="w3-third w3-margin-bottom">
-              <div class="w3-container w3-white">
+            <div id="rec" className="w3-third w3-margin-bottom">
+              <div className="w3-container w3-white">
                 {fromP.aplaylist(this.props.activity)}
 
               </div>
@@ -194,11 +193,11 @@ class App extends Component {
             </div>
 
             <div id="NUdiv">
-              <iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+              <iframe width="100%" height="100%" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
             </div>
 
             <div id="soundclouddiv">
-              <iframe width="100%" height="100%" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/212094702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+              <iframe width="100%" height="100%" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/212094702&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
             </div>
 
           </div>

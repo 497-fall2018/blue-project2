@@ -40,7 +40,7 @@ export const aplaylist = (activity) => (
       if (loading) return <p></p>;
       if (error) return <p>Error :(</p>;
       return (
-        <iframe className="iframe" allow="encrypted-media" id="user_playlist" width="75%" height="600" scrolling="no" frameborder="no" src={
+        <iframe className="iframe" allow="encrypted-media" id="user_playlist" width="75%" height="600" scrolling="no" frameBorder="no" src={
           data.aplaylist[0] === undefined ?
             "" : data.aplaylist[0].activity_src
         } />
