@@ -94,7 +94,7 @@
   width: 90%;
   opacity: 1;
   /* border: 1px solid white; */
-  margin-left: 20px;
+  margin-left: 5%;
 }
 
 #spotifydiv{
@@ -104,7 +104,7 @@
   width: 90%;
   opacity: 1;
   /* border: 1px solid white; */
-  margin-left: 20px;
+  margin-left: 5%;
 }
 
 #youtubediv{
@@ -113,7 +113,7 @@
   height: 275px;
   width: 90%;
   opacity: 1;
-  margin-left: 30px;
+  margin-left: 5%;
 }
 
 #select_activity {
