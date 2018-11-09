@@ -25,6 +25,8 @@ import { IconButton } from '@material-ui/core';
 import * as fromP from './reducers/getPlaylist'
 // import gql from "graphql-tag";
 import SpotifyPlayer from 'react-spotify-player';
+import ReactTooltip from 'react-tooltip';
+import { Hashtag } from 'react-twitter-widgets';
 
 
 const size = {
@@ -242,11 +244,31 @@ class App extends Component {
             style={{ textAlign: "left", padding: 20 }}
             wrap="wrap"
           >
-            <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)} />
-            <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
-            <img alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} onClick={(e) => this.handleYoutubeClick(e)} />
-            <img id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} onClick={(e) => this.handleNUClick(e)} />
 
+            <img data-tip data-for='spot_tooltip' alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)} />
+            <ReactTooltip id='spot_tooltip' place="top" type="light" effect="float">
+            <a>Spotify Top Charts 2018</a>
+            </ReactTooltip>
+
+            <img data-tip data-for='sound_tooltip' alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
+            <ReactTooltip id='sound_tooltip' place="top" type="light" effect="float">
+            <a>Soundcloud Top Charts 2018</a>
+            </ReactTooltip>
+
+            <img data-tip data-for='youtube_tooltip' alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} onClick={(e) => this.handleYoutubeClick(e)} />
+            <ReactTooltip id='youtube_tooltip' place="top" type="light" effect="float">
+            <a>Youtube Top Charts 2018</a>
+            </ReactTooltip>
+
+            <img data-tip data-for='NU_tooltip' id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} onClick={(e) => this.handleNUClick(e)} />
+            <ReactTooltip id='NU_tooltip' place="top" type="light" effect="float">
+            <a>Recommended by NU Students like you!</a>
+            </ReactTooltip>
+
+            <div id="twitter_div">\
+            <a style={{color:"#ffffff"}}>Share DJPrudo!</a>
+            <Hashtag hashtag="DJPrudo"/>
+            </div>
 
           </Grid>
 
@@ -281,8 +303,6 @@ class App extends Component {
 
 
           </div>
-
-
         </div>
       </div>
 

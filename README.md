@@ -75,6 +75,16 @@ To download Spotify player:
 npm install react-spotify-player
 ```
 
+To add tooltips:
+
+```
+npm install react-tooltip
+```
+
+To add Twitter widget:
+```
+npm install --save react-twitter-widgets
+```
 
 
 When things are broken, please try:
