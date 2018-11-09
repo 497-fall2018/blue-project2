@@ -19,6 +19,7 @@ import { bindActionCreators } from 'redux';
 import * as fromPlaylists from '../reducers/getPlaylist';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import SimpleEditModalWrapped from './SimpleEditModal.js'
 
 function renderInputComponent(inputProps) {
   const { classes, inputRef = () => { }, ref, ...other } = inputProps;
@@ -42,7 +43,7 @@ function renderInputComponent(inputProps) {
           <InputAdornment position="start">
 
             <SimpleModalWrapped />
-
+            <SimpleEditModalWrapped />
           </InputAdornment>
         ),
         classes: {
