@@ -75,7 +75,11 @@ To download Spotify player:
 npm install react-spotify-player
 ```
 
+To add tooltips:
 
+```
+npm install react-tooltip
+```
 
 When things are broken, please try:
 ```

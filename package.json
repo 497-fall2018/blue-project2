@@ -26,6 +26,7 @@
     "react-redux": "^5.0.7",
     "react-scripts": "^2.0.5",
     "react-spotify-player": "^1.0.4",
+    "react-tooltip": "^3.9.0",
     "reactstrap": "^6.5.0",
     "redux": "^4.0.1",
     "yarn": "^1.10.1"
