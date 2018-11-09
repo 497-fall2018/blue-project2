@@ -26,6 +26,7 @@ import * as fromP from './reducers/getPlaylist'
 // import gql from "graphql-tag";
 import SpotifyPlayer from 'react-spotify-player';
 import ReactTooltip from 'react-tooltip';
+import { Hashtag } from 'react-twitter-widgets';
 
 
 const size = {
@@ -264,6 +265,10 @@ class App extends Component {
             <a>Recommended by NU Students like you!</a>
             </ReactTooltip>
 
+            <div id="twitter_div">\
+            <a style={{color:"#ffffff"}}>Share DJPrudo!</a>
+            <Hashtag hashtag="DJPrudo"/>
+            </div>
 
           </Grid>
 
@@ -298,8 +303,6 @@ class App extends Component {
 
 
           </div>
-
-
         </div>
       </div>
 
