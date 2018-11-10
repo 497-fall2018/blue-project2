@@ -198,7 +198,6 @@ class App extends Component {
 
     return (
       <div className='App'>
-      <History/>
         <div className='searchPart'>
           <video className='videoTag' autoPlay loop muted>
             <source src={background_video2} type='video/mp4' /> </video>
@@ -244,6 +243,7 @@ class App extends Component {
             style={{ textAlign: "left", padding: 20 }}
             wrap="wrap"
           >
+            <History/>
             <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)} />
             <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
             <img alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} onClick={(e) => this.handleYoutubeClick(e)} />
