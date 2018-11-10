@@ -14,7 +14,7 @@ import Search from '@material-ui/icons/Search'
 import { IconButton } from '@material-ui/core';
 import { connect } from 'react-redux'
 import SimpleModalWrapped from './SimpleModal.js'
-import { updateActivity, get_playlists } from '../actions/actionCreator';
+import { updateActivity, updateVisibility } from '../actions/actionCreator';
 import { bindActionCreators } from 'redux';
 import * as fromPlaylists from '../reducers/getPlaylist';
 import { graphql } from 'react-apollo';
@@ -22,7 +22,7 @@ import gql from 'graphql-tag';
 import SimpleEditModalWrapped from './SimpleEditModal.js'
 
 function renderInputComponent(inputProps) {
-  const { edit, classes, inputRef = () => { }, ref, ...other } = inputProps;
+  const { show, classes, inputRef = () => { }, ref, ...other } = inputProps;
   return (
     <TextField
       fullWidth
@@ -43,7 +43,7 @@ function renderInputComponent(inputProps) {
           <InputAdornment position="start">
 
             <SimpleModalWrapped />
-            {edit ? <SimpleEditModalWrapped /> : null}
+            {show ? <SimpleEditModalWrapped /> : null}
 
           </InputAdornment>
         ),
@@ -184,6 +184,10 @@ class IntegrationAutosuggest extends React.Component {
   };
   handleKeyDown = (name) => (event) => {
     this.props.updateActivity(this.state.single.toLowerCase());
+
+    if (event.keyCode == 8) {
+      this.props.updateVisibility(false)
+    }
   }
   handleChange = (name) => (event, { newValue }) => {
     this.setState({
@@ -194,7 +198,7 @@ class IntegrationAutosuggest extends React.Component {
 
   render() {
 
-    const { classes, data, edit } = this.props;
+    const { classes, data, show } = this.props;
     const playlists = data.playlists;
     const autosuggestProps = {
       renderInputComponent,
@@ -223,7 +227,7 @@ class IntegrationAutosuggest extends React.Component {
         <Autosuggest
           {...autosuggestProps}
           inputProps={{
-            edit,
+            show,
             classes,
             placeholder: 'Insert your activity here!',
             value: this.state.single,
@@ -251,13 +255,19 @@ class IntegrationAutosuggest extends React.Component {
 IntegrationAutosuggest.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+const mapStateToProps = (state) => {
 
+  return {
+    show: state.visibiReducer.show
+  }
+}
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    updateActivity
+    updateActivity,
+    updateVisibility
   }, dispatch)
 }
-export default withStyles(styles)(connect(null, mapDispatchToProps)(graphql(gql`
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(graphql(gql`
 query {
     playlists{
       activity,

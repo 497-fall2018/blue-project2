@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Autosu from './component/input-search';
 import { connect } from 'react-redux'
-import { updateActivity } from './actions/actionCreator'
+import { updateVisibility } from './actions/actionCreator'
 import { bindActionCreators } from 'redux'
 import background_video from './background.mp4';
 import background_video2 from './DJ_Audio.mp4';
@@ -49,8 +49,7 @@ class App extends Component {
       spotify_clicked: false,
       soundcloud_clicked: false,
       youtube_clicked: false,
-      NU_clicked: false,
-      show: false
+      NU_clicked: false
     }
 
 
@@ -59,9 +58,7 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({
-      show: true
-    })
+    this.props.updateVisibility(true);
   }
 
   handleOpenModal = () => {
@@ -227,7 +224,7 @@ class App extends Component {
                       DJ Produ saves your favorite beats all across platforms. Type your task and you are ready to go!
                     </Typography>
                     <div style={{ marginTop: 20 }}>
-                      <Autosu edit={this.state.show} />
+                      <Autosu />
 
                     </div>
                   </Grid>
@@ -314,14 +311,13 @@ class App extends Component {
   }
 }
 const mapStateToProps = (state) => {
-
   return {
     activity: state.activReducer.activity
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    updateActivity
+    updateVisibility
   }, dispatch)
 }
 
