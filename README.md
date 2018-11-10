@@ -75,6 +75,10 @@ To download Spotify player:
 npm install react-spotify-player
 ```
 
+To download Menu Bar:
+```
+npm install react-sidebar
+```
 
 
 When things are broken, please try:

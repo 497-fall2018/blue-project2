@@ -25,6 +25,7 @@ import { IconButton } from '@material-ui/core';
 import * as fromP from './reducers/getPlaylist'
 // import gql from "graphql-tag";
 import SpotifyPlayer from 'react-spotify-player';
+import History from './component/historyModal';
 
 
 const size = {
@@ -197,6 +198,7 @@ class App extends Component {
 
     return (
       <div className='App'>
+      <History/>
         <div className='searchPart'>
           <video className='videoTag' autoPlay loop muted>
             <source src={background_video2} type='video/mp4' /> </video>
