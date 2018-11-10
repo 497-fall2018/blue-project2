@@ -4,24 +4,27 @@ import MaterialTitlePanel from "./material_title_panel";
 
 const styles = {
   sidebar: {
-    width: 128,
+    width: 150,
     height: "100%"
   },
   sidebarLink: {
     display: "block",
     padding: "16px 0px",
-    color: "#757575",
+    color: "white",
     textDecoration: "none"
   },
   divider: {
     margin: "8px 0",
     height: 1,
-    backgroundColor: "#757575"
+    backgroundColor: "#46556F"
   },
   content: {
     padding: "8px",
     height: "100%",
-    backgroundColor: "white"
+    backgroundColor: "#46556F"
+  },
+  title : {
+    backgroundColor: "#323B4B"
   }
 };
 
@@ -41,7 +44,7 @@ const SidebarContent = props => {
   }
 
   return (
-    <MaterialTitlePanel title="Menu" style={style}>
+    <MaterialTitlePanel title="DJ Prudo" style={style}>
       <div style={styles.content}>
         <a href="index.html" style={styles.sidebarLink}>
           Home
