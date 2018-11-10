@@ -48,8 +48,9 @@ class App extends Component {
       playlists: [],
       spotify_clicked: false,
       soundcloud_clicked: false,
-      youtube_clicked:false,
-      NU_clicked: false
+      youtube_clicked: false,
+      NU_clicked: false,
+      show: false
     }
 
 
@@ -58,6 +59,9 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({
+      show: true
+    })
   }
 
   handleOpenModal = () => {
@@ -223,7 +227,7 @@ class App extends Component {
                       DJ Produ saves your favorite beats all across platforms. Type your task and you are ready to go!
                     </Typography>
                     <div style={{ marginTop: 20 }}>
-                      <Autosu />
+                      <Autosu edit={this.state.show} />
 
                     </div>
                   </Grid>
@@ -247,27 +251,27 @@ class App extends Component {
 
             <img data-tip data-for='spot_tooltip' alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)} />
             <ReactTooltip id='spot_tooltip' place="top" type="light" effect="float">
-            <a>Spotify Top Charts 2018</a>
+              <a>Spotify Top Charts 2018</a>
             </ReactTooltip>
 
             <img data-tip data-for='sound_tooltip' alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
             <ReactTooltip id='sound_tooltip' place="top" type="light" effect="float">
-            <a>Soundcloud Top Charts 2018</a>
+              <a>Soundcloud Top Charts 2018</a>
             </ReactTooltip>
 
             <img data-tip data-for='youtube_tooltip' alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} onClick={(e) => this.handleYoutubeClick(e)} />
             <ReactTooltip id='youtube_tooltip' place="top" type="light" effect="float">
-            <a>Youtube Top Charts 2018</a>
+              <a>Youtube Top Charts 2018</a>
             </ReactTooltip>
 
             <img data-tip data-for='NU_tooltip' id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} onClick={(e) => this.handleNUClick(e)} />
             <ReactTooltip id='NU_tooltip' place="top" type="light" effect="float">
-            <a>Recommended by NU Students like you!</a>
+              <a>Recommended by NU Students like you!</a>
             </ReactTooltip>
 
             <div id="twitter_div">\
-            <a style={{color:"#ffffff"}}>Share DJPrudo!</a>
-            <Hashtag hashtag="DJPrudo"/>
+            <a style={{ color: "#ffffff" }}>Share DJPrudo!</a>
+              <Hashtag hashtag="DJPrudo" />
             </div>
 
           </Grid>
@@ -299,7 +303,7 @@ class App extends Component {
 
 
             <div id="youtubediv">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLw-VjHDlEOgvtnnnqWlTqByAtC7tXBg6D" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLw-VjHDlEOgvtnnnqWlTqByAtC7tXBg6D" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 
           </div>

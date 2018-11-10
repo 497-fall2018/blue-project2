@@ -22,7 +22,7 @@ import gql from 'graphql-tag';
 import SimpleEditModalWrapped from './SimpleEditModal.js'
 
 function renderInputComponent(inputProps) {
-  const { classes, inputRef = () => { }, ref, ...other } = inputProps;
+  const { edit, classes, inputRef = () => { }, ref, ...other } = inputProps;
   return (
     <TextField
       fullWidth
@@ -43,7 +43,8 @@ function renderInputComponent(inputProps) {
           <InputAdornment position="start">
 
             <SimpleModalWrapped />
-            <SimpleEditModalWrapped />
+            {edit ? <SimpleEditModalWrapped /> : null}
+
           </InputAdornment>
         ),
         classes: {
@@ -193,7 +194,7 @@ class IntegrationAutosuggest extends React.Component {
 
   render() {
 
-    const { classes, data } = this.props;
+    const { classes, data, edit } = this.props;
     const playlists = data.playlists;
     const autosuggestProps = {
       renderInputComponent,
@@ -222,6 +223,7 @@ class IntegrationAutosuggest extends React.Component {
         <Autosuggest
           {...autosuggestProps}
           inputProps={{
+            edit,
             classes,
             placeholder: 'Insert your activity here!',
             value: this.state.single,
