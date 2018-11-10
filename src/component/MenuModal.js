@@ -13,7 +13,7 @@ import PageHeader from "react-bootstrap"
 import SidebarContent from "./sidebar_content"
 
 
-class History extends React.Component {
+class MenuSideBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -52,9 +52,9 @@ class History extends React.Component {
     );
   }
 }
-History.propTypes = {
+Menu.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 // We need an intermediary variable for handling the recursive nesting.
 
-export default History;
+export default MenuSideBar;

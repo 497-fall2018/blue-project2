@@ -25,7 +25,7 @@ import { IconButton } from '@material-ui/core';
 import * as fromP from './reducers/getPlaylist'
 // import gql from "graphql-tag";
 import SpotifyPlayer from 'react-spotify-player';
-import History from './component/historyModal';
+import MenuSideBar from './component/MenuModal';
 
 
 const size = {
@@ -243,7 +243,7 @@ class App extends Component {
             style={{ textAlign: "left", padding: 20 }}
             wrap="wrap"
           >
-            <History/>
+            <MenuSideBar/>
             <img alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)} />
             <img alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
             <img alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} onClick={(e) => this.handleYoutubeClick(e)} />
