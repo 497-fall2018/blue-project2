@@ -184,10 +184,17 @@ class IntegrationAutosuggest extends React.Component {
   };
   handleKeyDown = (name) => (event) => {
     this.props.updateActivity(this.state.single);
+    if (event.keyCode == 13) {
+      this.onSubmit(event);
 
+    }
     if (event.keyCode == 8) {
       this.props.updateVisibility(false)
     }
+  }
+  onSubmit = (event) => {
+    this.props.onSubmit(event);
+
   }
   handleChange = (name) => (event, { newValue }) => {
     this.setState({
@@ -200,6 +207,7 @@ class IntegrationAutosuggest extends React.Component {
 
     const { classes, data, show } = this.props;
     const playlists = data.playlists;
+    console.log(playlists)
     const autosuggestProps = {
       renderInputComponent,
       suggestions: this.state.suggestions,

@@ -224,7 +224,7 @@ class App extends Component {
                       DJ Produ saves your favorite beats all across platforms. Type your task and you are ready to go!
                     </Typography>
                     <div style={{ marginTop: 20 }}>
-                      <Autosu />
+                      <Autosu onSubmit={this.handleSubmit} />
 
                     </div>
                   </Grid>

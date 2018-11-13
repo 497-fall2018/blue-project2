@@ -35,7 +35,7 @@ export const playlists = () => (
   </Query>
 );
 export const aplaylist = (activity) => (
-  <Query query={get_a_playlist} variables={{ activity }}>
+  <Query query={get_a_playlist} variables={{ activity }} fetchPolicy="cache-and-network">
     {({ loading, error, data }) => {
       if (loading) return <p></p>;
       if (error) return <p>Error :(</p>;

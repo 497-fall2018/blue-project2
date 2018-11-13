@@ -72,7 +72,6 @@ class SimpleEditModal extends React.Component {
     super(props)
     this.state = {
       open: false,
-      name: '',
       link: '',
       errors: [],
       success: false
@@ -92,25 +91,24 @@ class SimpleEditModal extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.props.activity)
     const Key = this.props.data.findKey;
     const { link } = this.state;
     const errors = validate(link);
-      if (errors.length > 0) {
-          this.setState({ errors });
-      }
-      else {
+    if (errors.length > 0) {
+      this.setState({ errors });
+    }
+    else {
       this.props.mutate({
         variables: {
           input: { key: Key, activity: this.props.activity, activity_src: link }
         }
       });
-          this.setState({
-              link: '',
-              errors: [],
-              success: true
-          })
-  }
+      this.setState({
+        link: '',
+        errors: [],
+        success: true
+      })
+    }
 
   };
   render() {
@@ -132,7 +130,7 @@ class SimpleEditModal extends React.Component {
               Swap the playlist with one you love!
             <form>
                 <TextField
-                    value = { this.props.activity }
+                  value={this.props.activity}
                   label="Activity Name"
                 />
                 <TextField
@@ -164,36 +162,39 @@ SimpleEditModal.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => {
-    return {
-        activity: state.activReducer.activity
-    }
+  return {
+    activity: state.activReducer.activity
+  }
 }
 // We need an intermediary variable for handling the recursive nesting.
 
 export default compose(
-    withStyles(styles),
-    (connect(mapStateToProps, null)),
-    graphql(gql`query findKey($activity: String) {
+  withStyles(styles),
+  (connect(mapStateToProps, null)),
+  graphql(gql`query findKey($activity: String) {
         findKey(activity:$activity)
-}`,{
-        options: (props) => ({
-            variables: {
-                activity: props.activity
-            }
-    })}),
-    graphql(gql` mutation updatePlaylist($input: PlaylistUpdateInput!){
+}`, {
+      options: (props) => ({
+        variables: {
+          activity: props.activity
+        }
+      })
+    }),
+  graphql(gql` mutation updatePlaylist($input: PlaylistUpdateInput!){
         updatePlaylist(input: $input){
           activity,
           activity_src
-  }}`,{
-        options: (props)=> ({
-            update: (proxy, { data: { updatePlaylist } }) => {
-                const { playlists } = proxy.readQuery({ query: playlistquery });
-                proxy.writeQuery({
-                    query: playlistquery,
-                    data: { playlists: playlists.filter(p => p.activity !== props.activity).concat(updatePlaylist) }
-                });
-            },
-        })
+  }}`, {
+      options: (props) => ({
+        update: (proxy, { data: { updatePlaylist } }) => {
+          const { playlists } = proxy.readQuery({ query: playlistquery });
+          proxy.writeQuery({
+            query: playlistquery,
+            data: {
+              playlists: playlists.filter(p => p.activity !== props.activity).concat(updatePlaylist)
+            }
+          });
+        },
+      })
     }),
-    )(SimpleEditModal);
+)(SimpleEditModal);
