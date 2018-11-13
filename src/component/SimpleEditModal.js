@@ -9,6 +9,9 @@ import Edit from '@material-ui/icons/Edit'
 import { IconButton } from '@material-ui/core';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { connect } from 'react-redux';
+import { compose } from "react-apollo";
+
 const playlistquery = gql`
 query {
     playlists{
@@ -16,7 +19,7 @@ query {
       activity_src
     }
   }
-`
+`;
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -55,13 +58,10 @@ const styles = theme => ({
     width: theme.spacing.unit * 50,
   }
 });
-function validate(name, link) {
+function validate(link) {
   // we are going to store errors for all fields
   // in a signle array
   const errors = [];
-  if (name.length === 0) {
-    errors.push("Please enter an activity name");
-  }
   if (link.length === 0) {
     errors.push("Please enter a playlist link");
   }
@@ -85,7 +85,6 @@ class SimpleEditModal extends React.Component {
   handleClose = () => {
     this.setState({
       open: false,
-      name: '',
       link: '',
       errors: [],
       success: false
@@ -93,27 +92,29 @@ class SimpleEditModal extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    const { name, link } = this.state;
-    const errors = validate(name, link);
-    if (errors.length > 0) {
-      this.setState({ errors });
-    }
-    else {
+    console.log(this.props.activity)
+    const Key = this.props.data.findKey;
+    const { link } = this.state;
+    const errors = validate(link);
+      if (errors.length > 0) {
+          this.setState({ errors });
+      }
+      else {
       this.props.mutate({
         variables: {
-          input: { activity: name, activity_src: link }
+          input: { key: Key, activity: this.props.activity, activity_src: link }
         }
-      })
-      this.setState({
-        name: '',
-        link: '',
-        errors: [],
-        success: true
-      })
+      });
+          this.setState({
+              link: '',
+              errors: [],
+              success: true
+          })
+  }
 
-    }
   };
   render() {
+
     const { classes } = this.props;
     const { errors } = this.state;
     const { success } = this.state;
@@ -131,6 +132,7 @@ class SimpleEditModal extends React.Component {
               Swap the playlist with one you love!
             <form>
                 <TextField
+                    value = { this.props.activity }
                   label="Activity Name"
                 />
                 <TextField
@@ -161,23 +163,37 @@ class SimpleEditModal extends React.Component {
 SimpleEditModal.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-// We need an intermediary variable for handling the recursive nesting.
-const SimpleEditModalWrapped = withStyles(styles)(SimpleEditModal);
-export default graphql(gql`
-mutation createPlaylist($input: PlaylistCreateInput!){
-  createPlaylist(input: $input){
-    activity,
-  	activity_src
-  }
-}
-`, {
-    options: {
-      update: (proxy, { data: { createPlaylist } }) => {
-        const { playlists } = proxy.readQuery({ query: playlistquery });
-        proxy.writeQuery({
-          query: playlistquery,
-          data: { playlists: playlists.concat(createPlaylist) }
-        });
-      },
+const mapStateToProps = (state) => {
+    return {
+        activity: state.activReducer.activity
     }
-  })(SimpleEditModalWrapped);
+}
+// We need an intermediary variable for handling the recursive nesting.
+
+export default compose(
+    withStyles(styles),
+    (connect(mapStateToProps, null)),
+    graphql(gql`query findKey($activity: String) {
+        findKey(activity:$activity)
+}`,{
+        options: (props) => ({
+            variables: {
+                activity: props.activity
+            }
+    })}),
+    graphql(gql` mutation updatePlaylist($input: PlaylistUpdateInput!){
+        updatePlaylist(input: $input){
+          activity,
+          activity_src
+  }}`,{
+        options: (props)=> ({
+            update: (proxy, { data: { updatePlaylist } }) => {
+                const { playlists } = proxy.readQuery({ query: playlistquery });
+                proxy.writeQuery({
+                    query: playlistquery,
+                    data: { playlists: playlists.filter(p => p.activity !== props.activity).concat(updatePlaylist) }
+                });
+            },
+        })
+    }),
+    )(SimpleEditModal);

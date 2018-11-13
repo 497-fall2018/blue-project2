@@ -183,7 +183,7 @@ class IntegrationAutosuggest extends React.Component {
     });
   };
   handleKeyDown = (name) => (event) => {
-    this.props.updateActivity(this.state.single.toLowerCase());
+    this.props.updateActivity(this.state.single);
 
     if (event.keyCode == 8) {
       this.props.updateVisibility(false)

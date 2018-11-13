@@ -276,7 +276,7 @@ class App extends Component {
           <div className="greyContainer">
             <div id="rec" className="w3-third w3-margin-bottom">
               <div className="resultiframe">
-                {fromP.aplaylist(this.props.activity)}
+                {fromP.aplaylist(this.props.activity.toLowerCase())}
 
               </div>
             </div>

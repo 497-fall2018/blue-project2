@@ -17,7 +17,7 @@ const activReducer = (state = INITIAL_DATA, action) => {
       return {
         activity: action.activity,
 
-      }
+      };
 
     default:
       return state;
