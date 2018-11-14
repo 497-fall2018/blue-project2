@@ -9,7 +9,7 @@
     ]
   },
   "hosting": {
-    "public": "public",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -17,7 +17,7 @@
     ]
   },
   "firestore": {
-    "rules": "n",
+    "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   }
 }
