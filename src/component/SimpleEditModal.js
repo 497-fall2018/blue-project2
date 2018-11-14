@@ -130,8 +130,12 @@ class SimpleEditModal extends React.Component {
               Swap the playlist with one you love!
             <form>
                 <TextField
+                  disabled
                   value={this.props.activity}
                   label="Activity Name"
+                  variant="outlined"
+                  margin = "normal"
+                  fullWidth={true}
                 />
                 <TextField
                   value={this.state.link}
