@@ -206,18 +206,12 @@ class App extends Component {
           <section className='add-item'>
             <form id="form" action="#" onSubmit={this.handleSubmit} >
               <div id="prefetch">
-                <div style={{
-                  paddingTop: 130,
-                  paddingLeft: 100,
-                  paddingRight: 100
-                }}>
+                <div className="wrappad">
                   <Grid
                     container
                     direction="column"
-
                   >
-
-                    <Typography align='left' color='inherit' component="h2" variant="h1" gutterBottom>
+                    <Typography align='left' color='inherit' component="h2" variant="h1" gutterBottom className="headertext">
                       DJ Produ
                     </Typography>
                     <Typography align='left' color='inherit' variant="h5" gutterBottom>
@@ -291,16 +285,16 @@ class App extends Component {
             </div>
 
             <div id="NUdiv">
-              <iframe width="100%" height="100%" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+              <iframe className="iframe" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
             </div>
 
             <div id="soundclouddiv">
-              <iframe width="100%" height="100%" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/281743188&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+              <iframe className="iframe" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/281743188&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
             </div>
 
 
             <div id="youtubediv">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLw-VjHDlEOgvtnnnqWlTqByAtC7tXBg6D" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+              <iframe className="iframe" src="https://www.youtube.com/embed/videoseries?list=PLw-VjHDlEOgvtnnnqWlTqByAtC7tXBg6D" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 
           </div>
