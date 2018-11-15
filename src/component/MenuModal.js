@@ -9,7 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import { IconButton } from '@material-ui/core';
 import Menu from '@material-ui/icons/Menu'
 import Sidebar from "react-sidebar";
-import PageHeader from "react-bootstrap"
 import SidebarContent from "./sidebar_content"
 
 
@@ -45,7 +44,7 @@ class MenuSideBar extends React.Component {
           onSetOpen={this.onSetSidebarOpen}
           styles={{ sidebar: { background: "white" } }}
           >
-          <IconButton style={{ paddingTop: 30, paddingLeft: 30, color: 'white' }} onClick={() => this.onSetSidebarOpen(true)}><Menu/></IconButton>
+          <IconButton style={{ paddingTop: 30, paddingLeft: 0, color: 'white' }} onClick={() => this.onSetSidebarOpen(true)}><Menu/></IconButton>
         </Sidebar>
        
       
