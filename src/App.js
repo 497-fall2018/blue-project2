@@ -27,6 +27,7 @@ import * as fromP from './reducers/getPlaylist'
 import SpotifyPlayer from 'react-spotify-player';
 import ReactTooltip from 'react-tooltip';
 import { Hashtag } from 'react-twitter-widgets';
+import MenuSideBar from './component/MenuModal';
 
 
 const size = {
@@ -201,8 +202,9 @@ class App extends Component {
     return (
       <div className='App'>
         <div className='searchPart'>
-          <video className='videoTag' autoPlay loop muted>
-            <source src={background_video2} type='video/mp4' /> </video>
+        <section className='menubar'>
+        <MenuSideBar/>
+        </section>
           <section className='add-item'>
             <form id="form" action="#" onSubmit={this.handleSubmit} >
               <div id="prefetch">
@@ -210,7 +212,6 @@ class App extends Component {
                   <Grid
                     container
                     direction="column"
-
                   >
                     <Typography align='left' color='inherit' component="h2" variant="h1" gutterBottom className="headertext">
                       DJ Produ
@@ -227,8 +228,6 @@ class App extends Component {
               </div>
             </form>
           </section>
-
-
         </div>
 
         <div className="RecPart">
@@ -271,6 +270,8 @@ class App extends Component {
             <a style={{ color: "#ffffff" }}>Share DJPrudo!</a>
                 <Hashtag hashtag="DJPrudo" />
               </div>
+
+
 
             </Grid>
 
