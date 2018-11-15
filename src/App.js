@@ -202,9 +202,9 @@ class App extends Component {
     return (
       <div className='App'>
         <div className='searchPart'>
-        <section className='menubar'>
+        {/*<section className='menubar'>
         <MenuSideBar/>
-        </section>
+        </section>*/}
           <section className='add-item'>
             <form id="form" action="#" onSubmit={this.handleSubmit} >
               <div id="prefetch">
