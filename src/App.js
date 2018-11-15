@@ -210,6 +210,7 @@ class App extends Component {
                   <Grid
                     container
                     direction="column"
+
                   >
                     <Typography align='left' color='inherit' component="h2" variant="h1" gutterBottom className="headertext">
                       DJ Produ
@@ -233,71 +234,83 @@ class App extends Component {
         <div className="RecPart">
           <Grid
             container
-            direction="row"
-            justify="flex-start"
+            direction="column"
             alignItems="center"
-            style={{ textAlign: "left", padding: 20 }}
-            wrap="wrap"
+            style={{ textAlign: "center", padding: 20 }}
           >
+            <Grid
+              container
+              direction="row"
+              justify="flex-start"
+              alignItems="center"
+              style={{ textAlign: "left", paddingBottom: 20 }}
+              wrap="wrap"
+            >
 
-            <img data-tip data-for='spot_tooltip' alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)} />
-            <ReactTooltip id='spot_tooltip' place="top" type="light" effect="float">
-              <a>Spotify Top Charts 2018</a>
-            </ReactTooltip>
+              <img data-tip data-for='spot_tooltip' alt="spotifyicon" className="spIcon" src={require('./img/spotify.ico')} onClick={(e) => this.handleSpotifyClick(e)} />
+              <ReactTooltip id='spot_tooltip' place="top" type="light" effect="float">
+                <a>Spotify Top Charts 2018</a>
+              </ReactTooltip>
 
-            <img data-tip data-for='sound_tooltip' alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
-            <ReactTooltip id='sound_tooltip' place="top" type="light" effect="float">
-              <a>Soundcloud Top Charts 2018</a>
-            </ReactTooltip>
+              <img data-tip data-for='sound_tooltip' alt="soundcloudicon" className="platformIcon" src={require('./img/soundcloud.png')} onClick={(e) => this.handleSoundcloudClick(e)} />
+              <ReactTooltip id='sound_tooltip' place="top" type="light" effect="float">
+                <a>Soundcloud Top Charts 2018</a>
+              </ReactTooltip>
 
-            <img data-tip data-for='youtube_tooltip' alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} onClick={(e) => this.handleYoutubeClick(e)} />
-            <ReactTooltip id='youtube_tooltip' place="top" type="light" effect="float">
-              <a>Youtube Top Charts 2018</a>
-            </ReactTooltip>
+              <img data-tip data-for='youtube_tooltip' alt="youtubeicon" className="platformIcon" src={require('./img/youtube.png')} onClick={(e) => this.handleYoutubeClick(e)} />
+              <ReactTooltip id='youtube_tooltip' place="top" type="light" effect="float">
+                <a>Youtube Top Charts 2018</a>
+              </ReactTooltip>
 
-            <img data-tip data-for='NU_tooltip' id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} onClick={(e) => this.handleNUClick(e)} />
-            <ReactTooltip id='NU_tooltip' place="top" type="light" effect="float">
-              <a>Recommended by NU Students like you!</a>
-            </ReactTooltip>
+              <img data-tip data-for='NU_tooltip' id="NUicon" alt="NUicon" className="platformIcon" src={require('./img/NU.png')} onClick={(e) => this.handleNUClick(e)} />
+              <ReactTooltip id='NU_tooltip' place="top" type="light" effect="float">
+                <a>Recommended by NU Students like you!</a>
+              </ReactTooltip>
 
-            <div id="twitter_div">\
+              <div id="twitter_div">\
             <a style={{ color: "#ffffff" }}>Share DJPrudo!</a>
-              <Hashtag hashtag="DJPrudo" />
-            </div>
+                <Hashtag hashtag="DJPrudo" />
+              </div>
 
+            </Grid>
+
+
+            <Grid
+              className="greyContainer"
+              container
+              direction="column"
+              style={{ padding: 20 }}
+            >
+              <div id="rec" className="w3-third w3-margin-bottom">
+                <div className="resultiframe">
+                  {fromP.aplaylist(this.props.activity.toLowerCase())}
+
+                </div>
+              </div>
+
+              <div className="fra spotifydiv" id="spotifydiv">
+                <SpotifyPlayer
+                  uri="spotify:playlist:37i9dQZEVXbLRQDuF5jeBp"
+                  size={size}
+                  view={view}
+                  theme={theme}
+                />
+              </div>
+
+              <div id="NUdiv" className="fra NUdiv">
+                <iframe className="iframe" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+              </div>
+
+              <div id="soundclouddiv" className="fra scd">
+                <iframe className="iframe" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/281743188&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+              </div>
+
+
+              <div id="youtubediv" className="fra youtubediv">
+                <iframe className="iframe" src="https://www.youtube.com/embed/videoseries?list=PLw-VjHDlEOgvtnnnqWlTqByAtC7tXBg6D" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            </Grid>
           </Grid>
 
-          <div className="greyContainer">
-            <div id="rec" className="w3-third w3-margin-bottom">
-              <div className="resultiframe">
-                {fromP.aplaylist(this.props.activity.toLowerCase())}
-
-              </div>
-            </div>
-
-            <div className="spotifydiv" id="spotifydiv">
-              <SpotifyPlayer
-                uri="spotify:playlist:37i9dQZEVXbLRQDuF5jeBp"
-                size={size}
-                view={view}
-                theme={theme}
-              />
-            </div>
-
-            <div id="NUdiv">
-              <iframe className="iframe" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315636479&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-            </div>
-
-            <div id="soundclouddiv">
-              <iframe className="iframe" scrolling="no" frameBorder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/281743188&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-            </div>
-
-
-            <div id="youtubediv">
-              <iframe className="iframe" src="https://www.youtube.com/embed/videoseries?list=PLw-VjHDlEOgvtnnnqWlTqByAtC7tXBg6D" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-
-
-          </div>
         </div>
       </div>
 
