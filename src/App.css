@@ -8,7 +8,7 @@
 }
 
 .fra{
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 
@@ -40,8 +40,6 @@
   /* margin-top: 10%; */
 }
 
-.SpotifyPlayer {
-}
 
 .RecPart{
   z-index:1;

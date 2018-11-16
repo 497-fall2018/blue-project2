@@ -202,9 +202,11 @@ class App extends Component {
     return (
       <div className='App'>
         <div className='searchPart'>
-        {/*<section className='menubar'>
+          {/*<section className='menubar'>
         <MenuSideBar/>
         </section>*/}
+          <video className='videoTag' autoPlay loop muted>
+            <source src={background_video2} type='video/mp4' /> </video>
           <section className='add-item'>
             <form id="form" action="#" onSubmit={this.handleSubmit} >
               <div id="prefetch">
@@ -280,7 +282,7 @@ class App extends Component {
               className="greyContainer"
               container
               direction="column"
-              style={{ padding: 20 }}
+              style={{ padding: 15 }}
             >
               <div id="rec" className="w3-third w3-margin-bottom">
                 <div className="resultiframe">
