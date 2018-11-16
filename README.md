@@ -85,6 +85,8 @@ npm install react-tooltip
 To add Twitter widget:
 ```
 npm install --save react-twitter-widgets
+```
+
 To download Menu Bar:
 ```
 npm install react-sidebar
@@ -97,6 +99,7 @@ rm ./yarn.lock
 yarn
 yarn start
 ```
+
 To initialize firebase, do the following: 
 1. Log in to firebase
 2. ``` firebase init ```
