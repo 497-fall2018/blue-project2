@@ -97,3 +97,18 @@ rm ./yarn.lock
 yarn
 yarn start
 ```
+To initialize firebase, do the following: 
+1. Log in to firebase
+2. ``` firebase init ```
+3. ###DON'T OVERWRITE ANYTHING
+4. When you see something like this 
+```
+? What do you want to use as your public directory? (public)
+```
+Type in "Build"
+
+To deploy, do the following: 
+1. Log in to Firebase
+2. ``` yarn build ```
+3. ``` yarn global add serve && serve -s global ```
+4. firebase deploy
